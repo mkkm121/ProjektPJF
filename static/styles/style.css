@@ -1,0 +1,238 @@
+body  {
+    height: 100vh;
+    width: 100%;
+    background-color: white;
+    overflow: hidden;
+}
+footer
+{
+    border-top: groove;
+    border-top-color: #800000;
+    border-width: thin;
+    text-align: center;
+    font-size: small;
+}
+footer p{
+    margin-top: 5px;
+}
+#top-bar{
+    position: relative;
+    width: 100%;
+    height: 15%;
+    background-color: white;
+}
+#res_name{
+    position: absolute;
+    bottom: 40%;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+    font-size: 20px;
+    font-weight: lighter;
+}
+#contest-menu{
+    position: absolute;
+    bottom: 5%;
+    background-color: rgb(250,247, 232);
+    text-align: center;
+    width: 100%;
+    height: 30%;
+}
+.contest-menu-element{
+    font-family: Arial Narrow, sans-serif;
+    width: 7%;
+    text-align: center;
+    color: black;
+    display: inline-block;
+    height: 100%;
+    line-height: 2;
+    text-decoration: none;
+}
+#contest-menu-element-user{
+    margin-left: 28%;
+    margin-right: -28%;
+    text-align: center;
+    color: black;
+    display: inline-block;
+    justify-content: right;
+    height: 100%;
+    line-height: 2;
+    text-decoration: none;
+}
+a:hover {
+  color: #d1b62e;
+}
+#information-box{
+    height: 80%;
+    width: 100%;
+    background-color: rgb(250,247, 232);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+#information-box2{
+    height: 80%;
+    width: 100%;
+    background-color: rgb(250,247, 232);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+}
+#information-box2 h1{
+    font-size: 25px;
+    color: #ff3300;
+}
+#information-text{
+    height: 20%;
+    background-color: white;
+}
+#menu-layout{
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    width: 100%;
+}
+.menu{
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.menu-element{
+    height: 100%;
+    width: 25%;
+}
+.menu-element p{
+    padding: 10%;
+    font-size: 20px;
+    color: #ff3300;
+}
+.menu-element p a{
+    padding: 10%;
+    font-size: 15px;
+    color: #ff3300;
+}
+.menu-element-image{
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 25%;
+    height: 100%;
+}
+.information-box-content{
+    width: 50%;
+    margin: 1%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.information-box-content-text{
+    padding: 10%;
+}
+.information-box-content-image{
+    width: 100%;
+    height: 100%;
+    background-image: url("/static/main.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#contact{
+    padding: 5px;
+    text-decoration: none;
+    color: #ff3300;
+    border-color: #ff3300;
+    border: solid;
+}
+#contact:hover{
+    color:#800000;
+}
+.icon-user{
+    color: #ff3300;
+}
+.icon-user:hover{
+    color: #800000;
+}
+#hello-box{
+    clear: both;
+    color: #800000;
+}
+#hello-box h1{
+    text-align: center;
+    font-size: 30px;
+    color: #ff3300;
+}
+.carousel-wrapper{
+    margin-left: 5%;
+  height:80%;
+  position:relative;
+  width: 90%;
+}
+.carousel-item{
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  padding:25px 50px;
+  opacity:0;
+  transition: all 0.75s ease-in-out;
+    color:#800000;
+}
+.arrow{
+  border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 12px;
+}
+.arrow-prev{
+  left:-30px;
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%) rotate(135deg);
+}
+.arrow-next{
+  right:-30px;
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%) rotate(-45deg);
+  }
+
+.light{
+  color:rgb(250,247, 232);
+}
+@media (max-width: 480px) {
+      .arrow, .light .arrow {
+        background-size: 10px;
+        background-position: 10px 50%;
+      }}
+
+[id^="item"] {
+    display: none;
+  }
+.item-1 {
+    z-index: 2;
+    opacity: 1;
+  background:url('https://static.pexels.com/photos/6526/sea-beach-holiday-vacation-large.jpg');
+  background-size:cover;
+  }
+.item-2{
+  background:url('https://static.pexels.com/photos/6506/alcohol-bar-drinks-party-large.jpg');
+   background-size:cover;
+}
+.item-3{
+  background:url('https://static.pexels.com/photos/6529/lake-kajak-kayak-large.jpg');
+   background-size:cover;
+}
+*:target ~ .item-1 {
+    opacity: 0;
+  }
+
+#item-1:target ~ .item-1 {
+    opacity: 1;
+  }
+
+#item-2:target ~ .item-2, #item-3:target ~ .item-3 {
+    z-index: 3;
+    opacity: 1;
+  }
