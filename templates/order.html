@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Order</title>
+    <title>Restaurant App</title>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/fontello.css') }}">
 </head>
@@ -11,7 +11,7 @@
         <div id="res_name">
             <p>SNACKZEN</p>
         </div>
-        <div id="contest-menu">
+        <div id="contest-menu" >
             {% for el in menu %}
                 <a class="contest-menu-element" href="{{ el.url }}">{{ el.name }} </a>
             {% endfor %}
@@ -22,7 +22,7 @@
         <div class="information-box-content">
             <div class="information-box-content-text">
             <h1 style="color: #ff3300">Informacja</h1><br>Snackzen to Restauracja amerykańska w miejscowości Warszawa. Specjalizujemy się w śniadaniach, obiadach, kolacjach i wszelkich przekąskach. Używamy najświeższych składników, aby przyrządzać wyjątkowe dania w swobodnym, przyjaznym dla rodzin otoczeniu.
-<br><br>Nasza unikalna mieszanka lokalnych produktów i innowacyjne podejście do klasycznych potraw pomagają nam bezbłędnie łączyć odważne pomysły z tradycyjnymi przepisami. Czas wejść, usiąść i przygotować się na wspaniałe jedzenie!
+                        <br><br>Nasza unikalna mieszanka lokalnych produktów i innowacyjne podejście do klasycznych potraw pomagają nam bezbłędnie łączyć odważne pomysły z tradycyjnymi przepisami. Czas wejść, usiąść i przygotować się na wspaniałe jedzenie!
                 <br><br><br><a id="contact" href="kebab">Skontaktuj sie!</a>
             </div>
         </div>
@@ -32,7 +32,7 @@
          </div>
     </div>
 <footer>
-    <p>©Created by Maciej Kolodziej. WCY19IJ1S1</p>
+        <p>©Created by Maciej Kolodziej. WCY19IJ1S1</p>
     </footer>
 </body>
 </html>
