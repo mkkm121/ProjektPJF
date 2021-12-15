@@ -49,10 +49,11 @@ about_content = [
 ]
 menu_elements = [
     {
-        'image':'background-image: url(/static/food.jpg)'
+        'image':'background-image: url(/static/food.jpg)',
     },
 {
         'image':'Śniadanie'
+
     },
 {
         'image':'background-image: url(/static/food2.jfif)'
@@ -76,6 +77,27 @@ menu_elements2 = [
     'image': 'background-image: url(/static/food.jpg)'
     },
 ]
+
+images = [
+    {
+        'img':'static/food.jpg',
+        'name':'img-1',
+        'prev':'img-3',
+        'next':'img-2',
+    },
+    {
+        'img': 'static/food2.jfif',
+        'name':'img-2',
+        'prev':'img-1',
+        'next':'img-3',
+    },
+    {
+        'img': 'static/food3.jpg',
+        'name':'img-3',
+        'prev':'img-2',
+        'next':'img-1',
+    }
+]
 @app.route('/')
 @app.route('/home')
 def home():
@@ -83,7 +105,7 @@ def home():
 
 @app.route('/about')
 def about():
-    return render_template('About.html',about=about_content,menu=menu)
+    return render_template('About.html',about=about_content,menu=menu,images=images)
 
 @app.route('/menu')
 def menu_rend():
