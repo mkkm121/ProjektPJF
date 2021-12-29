@@ -1,8 +1,7 @@
-from flask import Flask, render_template, flash, redirect, url_for
-from forms import RegistrationForm, LoginForm
-
-app = Flask(__name__,static_url_path='/static')
-app.config['SECRET_KEY']= 'c255e55a9f701bbdd7fbe16d88972d50'
+from flask import render_template, flash, redirect, url_for
+from Restaurant.forms import RegistrationForm, LoginForm
+from Restaurant import app
+from Restaurant.models import User
 
 menu = [
     {
@@ -143,6 +142,3 @@ def login():
         else:
             flash('Logowanie nieudane. Sprawdz login i haslo', 'danger')
     return render_template('login.html', title='Login', form=form, menu=menu)
-
-if __name__ == '__main__':
-    app.run(debug=True)
