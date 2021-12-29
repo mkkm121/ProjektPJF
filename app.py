@@ -107,19 +107,19 @@ def home():
 
 @app.route('/about')
 def about():
-    return render_template('About.html',about=about_content,menu=menu,images=images)
+    return render_template('About.html',about=about_content,menu=menu,images=images,title='About')
 
 @app.route('/menu')
 def menu_rend():
-    return render_template('menu.html',menu=menu,menu_elements=menu_elements,menu_elements2=menu_elements2)
+    return render_template('menu.html',menu=menu,menu_elements=menu_elements,menu_elements2=menu_elements2,title='Menu')
 
 @app.route('/order')
 def order():
-    return render_template('order.html',menu=menu)
+    return render_template('order.html',menu=menu,title='Order')
 
 @app.route('/contact')
 def contact():
-    return render_template('contact.html',menu=menu)
+    return render_template('contact.html',menu=menu,title='Contact')
 
 @app.route('/kebab')
 def kebab():
@@ -129,9 +129,9 @@ def kebab():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        flash(f'Account created for {form.username.data}!','success')
+        flash(f'Account created for {form.username.data}!', 'success')
         return redirect(url_for('home'))
-    return render_template('register.html',title='Register',form=form)
+    return render_template('register.html',title='Register',form=form,menu=menu)
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -141,8 +141,8 @@ def login():
             flash('Zostales zalogowany!', 'success')
             return redirect(url_for('home'))
         else:
-            flash('Logowanie nieudane. Sprawdz login i haslo','danger')
-    return render_template('login.html', title='Login', form=form)
+            flash('Logowanie nieudane. Sprawdz login i haslo', 'danger')
+    return render_template('login.html', title='Login', form=form, menu=menu)
 
 if __name__ == '__main__':
     app.run(debug=True)

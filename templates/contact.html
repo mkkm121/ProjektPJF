@@ -1,23 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Contact</title>
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/fontello.css') }}">
-</head>
-<body>
-    <div id="top-bar">
-        <div id="res_name">
-            <p>SNACKZEN</p>
-        </div>
-        <div id="contest-menu">
-            {% for el in menu %}
-                <a class="contest-menu-element" href="{{ el.url }}">{{ el.name }} </a>
-            {% endfor %}
-        <a id="contest-menu-element-user" href="kebab"><i class="icon-user"></i> </a>
-        </div>
-    </div>
+{% extends "layout.html" %}
+{% block content %}
     <div style ="background-color: white"  id="information-box">
         <div class="information-box-content">
             <div class="information-box-content-text">
@@ -62,8 +44,4 @@
          </div>
          </div>
     </div>
-<footer>
-        <p>©Created by Maciej Kolodziej. WCY19IJ1S1</p>
-    </footer>
-</body>
-</html>
+{% endblock content %}
