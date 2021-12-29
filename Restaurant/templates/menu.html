@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div id="information-box2">
+        <div id="information-text">
+            <h1>Po prostu pycha</h1>
+            <p>Świeże pyszności</p>
+        </div>
+    <div id="menu-layout">
+        <div class="menu">
+            {% for i in menu_elements %}
+                {% if loop.index % 2 == 1 %}
+                    <div style = "{{ i.image }}" class="menu-element-image"></div>
+                {% elif loop.index % 2 == 0 %}
+                    <div class="menu-element"><p>{{ i.image }}<br><br><a id="contact" href="kebab">Zobacz wiecej!</a></p></div>
+                {% endif %}
+            {% endfor %}
+        </div>
+         <div class="menu">
+            {% for i in menu_elements2 %}
+                {% if loop.index % 2 == 0 %}
+                    <div style = "{{ i.image }}" class="menu-element-image"></div>
+                {% elif loop.index % 2 == 1 %}
+                    <div class="menu-element"><p>{{ i.image }}<br><br><a id="contact" href="kebab">Zobacz wiecej!</a></p></div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div id="information-box3">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="message-box">
+                      {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                          {{ message }}
+                        </div>
+              {% endfor %}
+                </div>
+            {% endif %}
+          {% endwith %}
+        <form method="post" action="" class ='form-group-text'>
+            {{ form.hidden_tag() }}
+            <fieldset class ='form-group'>
+                <legend class="border-bottom mb-4">Logowanie</legend>
+                <div class="form-group-element">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group-element">
+                    {{ form.password.label(class="form-control-label") }}
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-check">
+                    {{ form.remember(class="form-check-input") }}
+                    {{ form.remember.label(class="form-check-label") }}
+                </div>
+                <div class ="form-group-btn">
+                    {{ form.submit(class="btn btn-outline-info") }}
+                 </div>
+                <div class="text-muted">
+                     <a href="#">Zapomniales hasla?</a>
+                </div>
+            </fieldset>
+        </form>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Nie jestes zarejestrowany? <a class="ml-2" href="{{ url_for('register') }}">Zarejestruj sie!</a>
+        </small>
+    </div>
+    </div>
+{% endblock content %}
