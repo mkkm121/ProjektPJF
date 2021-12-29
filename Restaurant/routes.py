@@ -1,7 +1,9 @@
+import flask_bcrypt
 from flask import render_template, flash, redirect, url_for
 from Restaurant.forms import RegistrationForm, LoginForm
-from Restaurant import app
+from Restaurant import app, db, bcrypt
 from Restaurant.models import User
+from flask_login import login_user, current_user, logout_user
 
 menu = [
     {
@@ -102,23 +104,23 @@ images = [
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template('home.html',menu=menu)
+    return render_template('home.html', menu=menu)
 
 @app.route('/about')
 def about():
-    return render_template('About.html',about=about_content,menu=menu,images=images,title='About')
+    return render_template('About.html', about=about_content, menu=menu, images=images, title='About')
 
 @app.route('/menu')
 def menu_rend():
-    return render_template('menu.html',menu=menu,menu_elements=menu_elements,menu_elements2=menu_elements2,title='Menu')
+    return render_template('menu.html', menu=menu, menu_elements=menu_elements, menu_elements2=menu_elements2, title='Menu')
 
 @app.route('/order')
 def order():
-    return render_template('order.html',menu=menu,title='Order')
+    return render_template('order.html', menu=menu, title='Order')
 
 @app.route('/contact')
 def contact():
-    return render_template('contact.html',menu=menu,title='Contact')
+    return render_template('contact.html', menu=menu, title='Contact')
 
 @app.route('/kebab')
 def kebab():
@@ -126,19 +128,34 @@ def kebab():
 
 @app.route('/register', methods=['GET','POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        flash(f'Account created for {form.username.data}!', 'success')
-        return redirect(url_for('home'))
-    return render_template('register.html',title='Register',form=form,menu=menu)
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
+        flash(f'Konto zostało utworzone. Możesz sie zalogować!', 'success')
+        return redirect(url_for('login'))
+    return render_template('register.html', title='Register', form=form, menu=menu)
 
-@app.route('/login', methods=['GET','POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
-        if form.email.data == 'admin@admin.com' and form.password.data == 'admin':
-            flash('Zostales zalogowany!', 'success')
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
+            flash(f'Zalogowano. Witaj {user.username}', 'success')
             return redirect(url_for('home'))
         else:
             flash('Logowanie nieudane. Sprawdz login i haslo', 'danger')
     return render_template('login.html', title='Login', form=form, menu=menu)
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
