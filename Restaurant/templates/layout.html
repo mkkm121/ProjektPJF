@@ -19,9 +19,22 @@
             {% for el in menu %}
                 <a class="contest-menu-element" href="{{ el.url }}">{{ el.name }} </a>
             {% endfor %}
-            <a id="contest-menu-element-user" href="register"><i class="icon-user"></i></a>
             {% if current_user.is_authenticated %}
-                <a id="contest-menu-element-user" href="{{ url_for("logout") }}">Wyloguj</a>
+                <div class="contest-menu-element-user">
+            <a><i class="icon-user"></i></a>
+                <div class="dropdown-content">
+                    <a href="account">Moj profil</a>
+                    <a href="{{ url_for("logout") }}">Wyloguj</a>
+                 </div>
+            </div>
+            {% else %}
+                <div class="contest-menu-element-user">
+            <a><i class="icon-user"></i></a>
+                <div class="dropdown-content">
+                    <a href="login">Zaloguj się!</a>
+                    <a href="register">Założ konto!</a>
+                 </div>
+            </div>
             {% endif %}
         </div>
     </div>

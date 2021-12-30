@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div id="information-box">
+    <div class="information-box-content3">
+     {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div>
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+        <h1>Moje konto</h1>
+        <h3>Nazwa użytkownika: {{ current_user.username }}</h3>
+        <p>E-mail: {{ current_user.email }}</p>
+        <form method="post" action="" class ='form-group-text'>
+            {{ form.hidden_tag() }}
+            <fieldset class ='form-group'>
+                    <legend>Aktualizuj konto</legend>
+                    <div class="form-group-element">
+                        {{ form.username.label(class="form-control-label") }}
+                        {% if form.username.errors %}
+                            {{ form.username(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.username.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.username(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group-element">
+                        {{ form.email.label(class="form-control-label") }}
+                        {% if form.email.errors %}
+                            {{ form.email(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.email(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class ="form-group-btn">
+                         {{ form.submit(class="btn") }}
+                     </div>
+            </fieldset>
+        </form>
+    </div>
+    </div>
+{% endblock %}

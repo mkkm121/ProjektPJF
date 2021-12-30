@@ -97,7 +97,7 @@ input[type=text]:focus,input[type=password]:focus {
     line-height: 2;
     text-decoration: none;
 }
-#contest-menu-element-user{
+.contest-menu-element-user{
     margin-left: 28%;
     margin-right: -28%;
     text-align: center;
@@ -112,6 +112,27 @@ a:hover {
   color: #7d6d1c;
   background-color:#f6f0d5;
 }
+.dropdown-content {
+  display: none;
+  position: absolute;
+    right: 0;
+  background-color: #f1f1f1;
+  min-width: 12%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  color: #ff3300;
+    background-color: rgb(250,247, 232);
+  text-decoration: none;
+  display: block;
+}
+.dropdown-content a:hover {
+      color: #7d6d1c;
+  background-color:#f6f0d5;
+}
+.contest-menu-element-user:hover .dropdown-content {display: block;}
+
 #information-box{
     height: 80%;
     width: 100%;
@@ -140,6 +161,7 @@ a:hover {
     justify-content: center;
     text-align: center;
 }
+
 #information-box2 h1{
     font-size: 25px;
     color: #ff3300;
@@ -226,6 +248,14 @@ a:hover {
     display: inline-block;
     flex-direction: row;
     flex-wrap: wrap;
+}
+.information-box-content3{
+    align-self: center;
+    height: 95%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 .information-box-content-text{
     padding: 10%;
@@ -476,4 +506,82 @@ input:checked + .slide-container .nav label { display: block; }
 .message-box{
     margin-top: 1%;
     margin-bottom: -6%;
+}
+#menu-box{
+    height: 90%;
+    width: 85%;
+    background-color: #fff;
+    margin: auto;
+    overflow: auto;
+}
+#menu-box a{
+    text-decoration: none;
+    color: black;
+}
+.menu-element2{
+    width: 95%;
+    height: 20%;
+    background-color: rgb(250,247, 232);
+    margin-top: 1%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 2%;
+    border: solid #e8da96;
+}
+.menu-element2:hover{
+    border-color: #bca429;
+}
+.menu-food{
+    margin: 0 auto 0 auto;
+    height: 100%;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    column-gap: 2%;
+}
+.food-photo{
+    width: 20%;
+    height: 100%;
+}
+.food-desc{
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.food-desc button {
+    align-self: center;
+  border-radius: 4px;
+  background-color: #ff3300;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  width: 50%;
+  transition: all 0.5s;
+  cursor: pointer;
+    padding: 1%;
+}
+.food-desc button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+.food-desc button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20%;
+  transition: 0.5s;
+}
+
+.food-desc button:hover span {
+  padding-right: 8%;
+}
+
+.food-desc button:hover span:after {
+  opacity: 1;
+  right: 0;
 }

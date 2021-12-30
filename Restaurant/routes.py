@@ -1,10 +1,10 @@
-import flask_bcrypt
-from flask import render_template, flash, redirect, url_for
-from Restaurant.forms import RegistrationForm, LoginForm
-from Restaurant import app, db, bcrypt
+import os
+from flask import render_template, flash, redirect, url_for, request
+from Restaurant.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
+from Restaurant import app, db, bcrypt, mail
 from Restaurant.models import User
-from flask_login import login_user, current_user, logout_user
-
+from flask_login import login_user, current_user, logout_user, login_required
+from flask_mail import Message
 menu = [
     {
         'name':'HOME',
@@ -158,4 +158,58 @@ def login():
 @app.route("/logout")
 def logout():
     logout_user()
+    flash('Wylogowano', 'success')
     return redirect(url_for('home'))
+
+@app.route("/account", methods=['GET', 'POST'])
+@login_required
+def account():
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash('Twoje konto zostało zaktualizowane!','success')
+        return redirect(url_for('account'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    return render_template('Account.html', title='Account', menu=menu, form=form)
+
+def send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message('Zmiana hasła', sender='noreply@demo.com', recipients=[user.email])
+    msg.body = f'''Żeby zeresetować hasło, wejdź w poniższy:
+    {url_for('reset_token',token=token,_external=True)}
+    Jeżeli nie chciałes zmienić hasła, zignoruj tego maila.
+    '''
+    mail.send(msg)
+
+@app.route("/reset_password", methods=['GET','POST'])
+def reset_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form = RequestResetForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        send_reset_email(user)
+        flash('Wyslano email z instrukacją resetu hasła')
+        return redirect(url_for('login'))
+    return render_template('reset_request.html',title='Reset', menu=menu, form=form)
+
+@app.route("/reset_password/<token>", methods=['GET','POST'])
+def reset_token(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    user = User.verify_reset_token(token)
+    if user is None:
+        flash('Nieprawidłowy token (lub wygasł)','danger')
+        return redirect(url_for('reset_request'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user.password = hashed_password
+        db.session.commit()
+        flash('Hasło zostało zmienione. Możesz sie zalogować!', 'success')
+        return redirect(url_for('login'))
+    return render_template('reset_token.html',title='Reset', menu=menu, form=form)
