@@ -3,6 +3,17 @@
     <div style ="background-color: white"  id="information-box">
         <div class="information-box-content">
             <div class="information-box-content-text">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div>
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
             <h1 style="color: #ff3300">Skontaktuj sie z nami</h1><br>
                 <p>Puławska 11, 96-111 Warszawa</p><br>
                 <p>maciek.kolodziej2000@o2.pl</p><br>
@@ -12,32 +23,87 @@
          <div class="information-box-content2">
              <div class="information-box-content-text2">
               <form action="">
+              {{ form.hidden_tag() }}
                 <p>
-                  <label for="">Imie*</label>
-                  <input type="text">
+                  {{ form.name.label(class="form-control-label") }}
+                        {% if form.name.errors %}
+                            {{ form.name(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.name.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.name(class="form-control form-control-lg") }}
+                        {% endif %}
                 </p>
                 <p>
-                  <label for="">E-mail*</label>
-                  <input type="text">
+                  {{ form.email.label(class="form-control-label") }}
+                        {% if form.email.errors %}
+                            {{ form.email(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.email(class="form-control form-control-lg") }}
+                        {% endif %}
                 </p>
                 <p>
-                  <label for="">Telefon</label>
-                  <input type="text">
+                  {{ form.phone.label(class="form-control-label") }}
+                        {% if form.phone.errors %}
+                            {{ form.phone(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.phone.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.phone(class="form-control form-control-lg") }}
+                        {% endif %}
                 </p>
                 <p>
-                  <label for="">Adres</label>
-                  <input type="text">
+                  {{ form.address.label(class="form-control-label") }}
+                        {% if form.address.errors %}
+                            {{ form.address(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.address.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.address(class="form-control form-control-lg") }}
+                        {% endif %}
                 </p>
                 <p class="full-width">
-                  <label for="">Temat</label>
-                  <textarea id="" cols="40" rows="1"></textarea>
+                  {{ form.topic.label(class="form-control-label") }}
+                        {% if form.topic.errors %}
+                            {{ form.topic(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.topic.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.topic(class="form-control form-control-lg") }}
+                        {% endif %}
                 </p>
                 <p class="full-width">
-                  <label for="">Wiadomość</label>
-                  <textarea id="" cols="40" rows="5"></textarea>
+                  {{ form.body.label(class="form-control-label") }}
+                        {% if form.body.errors %}
+                            {{ form.body(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.body.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.body(class="form-control form-control-lg") }}
+                        {% endif %}
                 </p>
                 <p class="full-width" style="text-align: center;">
-                  <button class="submit">Wyslij</button>
+                  {{ form.submit(class="submit") }}
                     <br>Dziękujemy za przesłanie!
                 </p>
               </form>

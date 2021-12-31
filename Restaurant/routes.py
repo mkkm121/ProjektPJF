@@ -1,6 +1,6 @@
 import os
 from flask import render_template, flash, redirect, url_for, request
-from Restaurant.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
+from Restaurant.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm, MessageForm
 from Restaurant import app, db, bcrypt, mail
 from Restaurant.models import User
 from flask_login import login_user, current_user, logout_user, login_required
@@ -118,9 +118,30 @@ def menu_rend():
 def order():
     return render_template('order.html', menu=menu, title='Order')
 
-@app.route('/contact')
+def send_message(name, text, email, address, topic):
+    msg = Message(topic, sender='noreply@demo.com', recipients=[email])
+    msg.body = f'''
+    Od: {name}
+    Mail: {email}
+    Adres: {address}
+    Treść: 
+    {text}
+    '''
+    mail.send(msg)
+
+@app.route('/contact', methods=['GET','POST'])
 def contact():
-    return render_template('contact.html', menu=menu, title='Contact')
+    form = MessageForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        email = form.email.data
+        address = form.address.data
+        topic = form.topic.data
+        text = form.body.data
+        send_message(name, text, email, address, topic)
+        flash("E-mail został wysłany!", "success")
+        return redirect(url_for('home'))
+    return render_template('contact.html', menu=menu, title='Contact', form=form)
 
 @app.route('/kebab')
 def kebab():

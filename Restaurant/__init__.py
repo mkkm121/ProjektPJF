@@ -14,8 +14,8 @@ login_manager = LoginManager(app)
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = 'mkkm33986@gmail.com'
-app.config['MAIL_PASSWORD'] = 'hesatpzzvbozyyor'
+app.config['MAIL_USERNAME'] = 'snackzen0@gmail.com'
+app.config['MAIL_PASSWORD'] = 'okobblbotyneyokr'
 mail = Mail(app)
 
 from Restaurant import routes
