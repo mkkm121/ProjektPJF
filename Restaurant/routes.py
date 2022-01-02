@@ -1,6 +1,7 @@
 import os
 from flask import render_template, flash, redirect, url_for, request
-from Restaurant.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm, MessageForm
+from Restaurant.forms import RegistrationForm, LoginForm, UpdateAccountForm,\
+    RequestResetForm, ResetPasswordForm, MessageForm
 from Restaurant import app, db, bcrypt, mail
 from Restaurant.models import User
 from flask_login import login_user, current_user, logout_user, login_required
@@ -119,7 +120,7 @@ def order():
     return render_template('order.html', menu=menu, title='Order')
 
 def send_message(name, text, email, address, topic):
-    msg = Message(topic, sender='noreply@demo.com', recipients=[email])
+    msg = Message(topic, sender='noreply@demo.com', recipients=['snackzen0@gmail.com'])
     msg.body = f'''
     Od: {name}
     Mail: {email}
@@ -132,6 +133,9 @@ def send_message(name, text, email, address, topic):
 @app.route('/contact', methods=['GET','POST'])
 def contact():
     form = MessageForm()
+    if current_user.is_authenticated:
+        form.name.data = current_user.username
+        form.email.data = current_user.email
     if form.validate_on_submit():
         name = form.name.data
         email = form.email.data
@@ -139,8 +143,8 @@ def contact():
         topic = form.topic.data
         text = form.body.data
         send_message(name, text, email, address, topic)
-        flash("E-mail został wysłany!", "success")
-        return redirect(url_for('home'))
+        flash("E-mail został wysłany!", 'success')
+        return redirect(url_for('contact'))
     return render_template('contact.html', menu=menu, title='Contact', form=form)
 
 @app.route('/kebab')
@@ -214,9 +218,9 @@ def reset_request():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         send_reset_email(user)
-        flash('Wyslano email z instrukacją resetu hasła')
+        flash('Wyslano email z instrukacją resetu hasła','success')
         return redirect(url_for('login'))
-    return render_template('reset_request.html',title='Reset', menu=menu, form=form)
+    return render_template('reset_request.html', title='Reset', menu=menu, form=form)
 
 @app.route("/reset_password/<token>", methods=['GET','POST'])
 def reset_token(token):
@@ -224,7 +228,7 @@ def reset_token(token):
         return redirect(url_for('home'))
     user = User.verify_reset_token(token)
     if user is None:
-        flash('Nieprawidłowy token (lub wygasł)','danger')
+        flash('Nieprawidłowy token (lub wygasł)', 'danger')
         return redirect(url_for('reset_request'))
     form = ResetPasswordForm()
     if form.validate_on_submit():

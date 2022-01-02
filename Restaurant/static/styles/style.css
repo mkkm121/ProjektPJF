@@ -17,12 +17,12 @@ form {
     width: 100%;
     display: grid;
     grid-template-columns: auto auto;
-    grid-gap: 5%;
+    grid-gap: 1%;
 }
 footer p{
     margin-top: 8px;
 }
-input[type=text],input[type=password] {
+input[type=text],input[type=password], input[type=tel] {
   width: 100%;
   box-sizing: content-box;
   border: none;
@@ -31,7 +31,7 @@ input[type=text],input[type=password] {
   transition: 0.5s;
   outline: none;
 }
-input[type=text]:focus,input[type=password]:focus {
+input[type=text]:focus,input[type=password]:focus , input[type=tel]:focus{
   border-bottom: 3px solid #555;
 }
 
@@ -245,9 +245,6 @@ a:hover {
 }
 .information-box-content2{
     width: 50%;
-    display: inline-block;
-    flex-direction: row;
-    flex-wrap: wrap;
 }
 .information-box-content3{
     align-self: center;
@@ -262,8 +259,6 @@ a:hover {
     overflow-y: auto;
 }
 .information-box-content-text2{
-    margin-top: 15px;
-    margin-left: 25px;
     display: grid;
     width: 100%;
     grid-template-columns: auto auto;
@@ -279,8 +274,7 @@ a:hover {
     padding: 5px;
     text-decoration: none;
     color: #ff3300;
-    border-color: #ff3300;
-    border: solid;
+    border: solid #ff3300;
 }
 #contact:hover{
     color:#800000;
@@ -476,6 +470,35 @@ input:checked + .slide-container .nav label { display: block; }
     border-radius:.25rem;
     transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out
 }
+.form-control2{
+    width:100%;
+    font-size:1rem;
+    color:#495057;
+    border:1px solid #ced4da;
+    border-radius:.25rem;
+    transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out
+}
+.is-invalid{
+    width:100%;
+    padding:.375rem .75rem;
+    font-size:1rem;
+    line-height:1.5;
+    color: #495057;
+    background-clip:padding-box;
+    border: 2px solid #ff3300;
+    background-color: #ffcccc;
+    border-radius:.25rem;
+    transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out
+}
+.is-invalid2{
+    width:100%;
+    font-size:1rem;
+    color:#495057;
+    border: 2px solid #ff3300;
+    background-color: #ffcccc;
+    border-radius:.25rem;
+    transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out
+}
 .btn{
     font-size: 1rem;
     background-color: #ff3300;
@@ -584,4 +607,8 @@ input:checked + .slide-container .nav label { display: block; }
 .food-desc button:hover span:after {
   opacity: 1;
   right: 0;
+}
+.invalid-feedback {
+    color: #ff3300;
+    font-size: small;
 }
