@@ -1,6 +1,8 @@
 from Restaurant import db, login_manager, app
 from flask_login import UserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from flask_admin.contrib.sqla import ModelView
+from flask_login import current_user
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -27,3 +29,11 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f"User('{self.username}','{self.email}')"
+
+
+class MyModelView(ModelView):
+    def is_accessible(self):
+        if current_user.is_authenticated:
+            if current_user.username == 'admin':
+                return True
+
