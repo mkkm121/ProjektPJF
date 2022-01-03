@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div id="information-box">
+    <div id="information-box2">
+    <div id="cart"><a href="{{ url_for('getcart') }}"><i class="icon-cart"></i>Koszyk ({{ session['cart']|length}})</a></div>
         <div id="menu-box">
             {% for product in products %}
             <div class="menu-element2">
@@ -17,8 +18,11 @@
                         <small><i class="icon-time"></i> {{ product.category }} </small>
                     </div>
                     <div class="food-desc">
-                        <button><span>Zamów</span></button>
-                        <button><span>Dodaj do koszyka</span></button>
+                        <form action="{{ url_for('AddCart') }}" method="POST">
+                            <input type="hidden" name="id" value="{{ product.id }}">
+                            <button><span>Dodaj do koszyka</span></button>
+                        </form>
+                            <button><span>Zamów</span></button>
                     </div>
                 </div>
             </div>

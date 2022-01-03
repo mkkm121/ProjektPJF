@@ -615,3 +615,10 @@ input:checked + .slide-container .nav label { display: block; }
     color: #ff3300;
     font-size: small;
 }
+#cart{
+    height: 5%;
+    width: 90%;
+    color: #ff3300;
+    text-align: right;
+    text-decoration: none;
+}

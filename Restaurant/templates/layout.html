@@ -21,9 +21,9 @@
             {% endfor %}
             {% if current_user.is_authenticated %}
                 <div class="contest-menu-element-user">
-            <a><i class="icon-user"></i></a>
+            <a><i class="icon-user"></i></a>{{ current_user.username }}
                 <div class="dropdown-content">
-                    <a href="account">Moj profil</a>
+                    <a href="account">Mój profil</a>
                     <a href="{{ url_for("logout") }}">Wyloguj</a>
                  </div>
             </div>

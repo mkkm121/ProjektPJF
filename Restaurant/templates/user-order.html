@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div id="information-box">
+    <div class="container">
+        <div class="row">
+            <table class="table">
+            Invoice: {{ invoice }} <br>
+            Status: {{ orders.status }}
+            Nazwa użytkownika: {{ customer.username }} <br>
+            E-mail: {{ customer.email }} <br>
+                <thead>
+                    <th>Nr</th>
+                    <th>Nazwa</th>
+                    <th>Ilość</th>
+                    <th>Cena</th>
+                </thead>
+                <tbody>
+                    {% for key, product in orders.orders.items() %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.quantity }}"</td>
+                            <td>{{ product.price }} zł</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+{% endblock %}

@@ -74,3 +74,4 @@ class MessageForm(FlaskForm):
     body = TextAreaField('Wiadomość*', validators=[DataRequired(), Length(min=1, max=500)])
     submit = SubmitField('Wyślij!')
 
+

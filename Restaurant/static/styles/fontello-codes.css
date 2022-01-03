@@ -1,4 +1,8 @@
 
 .icon-price:before { content: '\e800'; } /* '' */
 .icon-time:before { content: '\e801'; } /* '' */
+.icon-cart:before { content: '\e802'; } /* '' */
+.icon-delete-all:before { content: '\e803'; } /* '' */
+.icon-update:before { content: '\e804'; } /* '' */
+.icon-delete:before { content: '\e805'; } /* '' */
 .icon-user:before { content: '\f2be'; } /* '' */

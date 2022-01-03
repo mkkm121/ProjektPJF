@@ -1,11 +1,14 @@
-from flask import render_template, flash, redirect, url_for, request
+import secrets
+
+from flask import render_template, flash, redirect, url_for, request, session
 from Restaurant.forms import RegistrationForm, LoginForm, UpdateAccountForm,\
     RequestResetForm, ResetPasswordForm, MessageForm
 from Restaurant import app, db, bcrypt, mail
-from Restaurant.models import User, Product
+from Restaurant.models import User, Product, CustomerOrder
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 from Restaurant.dicts import menu, images, menu_elements, menu_elements2, about_content
+
 
 @app.route('/')
 @app.route('/home')
@@ -144,3 +147,118 @@ def reset_token(token):
         flash('Hasło zostało zmienione. Możesz sie zalogować!', 'success')
         return redirect(url_for('login'))
     return render_template('reset_token.html',title='Reset', menu=menu, form=form)
+
+
+def MagerDicts(dict1, dict2):
+    if isinstance(dict1,list) and isinstance(dict2,list):
+        return dict1+dict2
+    elif isinstance(dict1,dict) and isinstance(dict2,dict):
+        return dict(list(dict1.items())+list(dict2.items()))
+    return False
+
+@app.route("/addcart", methods=['POST'])
+def AddCart():
+    try:
+        quantity = 1
+        product_id = request.form.get('id')
+        product = Product.query.filter_by(id=product_id).first()
+        if product_id and product and request.method == 'POST':
+            DictItems = {product_id: {'name': product.name, 'price': product.cost, 'image': product.image, 'quantity': quantity}}
+            if 'cart' in session:
+                if product_id in session['cart']:
+                    for key, item in session['cart'].items():
+                        if int(key) == int(product_id):
+                            session.modified = True
+                            item['quantity'] += 1
+                else:
+                    session['cart'] = MagerDicts(session['cart'], DictItems)
+            else:
+                session['cart'] = DictItems
+                return redirect(request.referrer)
+    except Exception as e:
+        print(e)
+    finally:
+        return redirect(request.referrer)
+
+@app.route("/cart")
+def getcart():
+    form = MessageForm()
+    if 'cart' not in session or len(session['cart']) <= 0:
+        return redirect(request.referrer)
+    total = 0
+    for key, product in session['cart'].items():
+        total += float(product['price']) * int(product['quantity'])
+    return render_template('cart.html', menu=menu, title='Cart', form=form, total=total)
+
+
+@app.route('/updatecart/<int:code>', methods=['POST'])
+def updatecart(code):
+    if 'cart' not in session and len(session['cart']) <= 0:
+        return redirect(url_for('home'))
+    if request.method == "POST":
+        quantity = request.form.get("quantity")
+        try:
+            session.modified = True
+            for key, item in session['cart'].items():
+                if int(key) == code:
+                    item['quantity'] = quantity
+                    flash("Koszyk został zaktualizowany",'success')
+                    return redirect(url_for('getcart'))
+        except Exception as e:
+            print(e)
+            return redirect(url_for('getcart'))
+
+
+@app.route('/deletecart/<int:id>')
+def deletecart(id):
+    if 'cart' not in session and len(session['cart']) <= 0:
+        return redirect(url_for('home'))
+    try:
+        session.modified = True
+        for key, item in session['cart'].items():
+            if int(key) == id:
+                session['cart'].pop(key,None)
+                return redirect(url_for('getcart'))
+    except Exception as e:
+        print(e)
+        return redirect(url_for('getcart'))
+
+@app.route('/clearcart')
+def clearcart():
+    try:
+        session.pop('cart',None)
+        return redirect(url_for('order'))
+    except Exception as e:
+        print(e)
+
+@app.route('/getorder')
+@login_required
+def getorder():
+    if current_user.is_authenticated:
+        customer_id = current_user.id
+        invoice = secrets.token_hex(5)
+        try:
+            order = CustomerOrder(invoice=invoice,customer_id=customer_id,orders=session['cart'])
+            db.session.add(order)
+            db.session.commit()
+            session.pop('cart')
+            flash('Zamówienie zostało złożone','success')
+            return redirect(url_for('orders', invoice=invoice))
+        except Exception as e:
+            print(e)
+            flash("Coś poszło nie tak",'danger')
+            return redirect(url_for('getcart'))
+
+@app.route('/orders/<invoice>')
+@login_required
+def orders(invoice):
+    if current_user.is_authenticated:
+       total = 0
+       customer_id = current_user.id
+       customer = User.query.filter_by(id=customer_id).first()
+       orders = CustomerOrder.query.filter_by(customer_id=customer_id).order_by(CustomerOrder.id.desc()).first()
+       for _key, product in orders.orders.items():
+           total = float(product['price']) * int(product['quantity'])
+    else:
+        return redirect(url_for('login'))
+    return render_template('user-order.html', menu=menu, invoice=invoice, total=total, customer=customer, orders=orders)
