@@ -34,7 +34,7 @@ class User(db.Model, UserMixin):
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
-    cost = db.Column(db.NUMERIC(2), nullable=False)
+    cost = db.Column(db.NUMERIC(2, 2), nullable=False)
     description = db.Column(db.String(200))
     category = db.Column(db.String(40))
     image = db.Column(db.String(50), nullable=False, default='static/food.jpg')

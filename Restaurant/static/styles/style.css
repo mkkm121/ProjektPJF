@@ -599,7 +599,10 @@ input:checked + .slide-container .nav label { display: block; }
   right: -20%;
   transition: 0.5s;
 }
-
+.food-desc small{
+    color: #ff3300;
+    font-size: 1rem;
+}
 .food-desc button:hover span {
   padding-right: 8%;
 }

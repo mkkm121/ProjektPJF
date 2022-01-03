@@ -1,2 +1,4 @@
 
+.icon-price:before { content: '\e800'; } /* '' */
+.icon-time:before { content: '\e801'; } /* '' */
 .icon-user:before { content: '\f2be'; } /* '' */
