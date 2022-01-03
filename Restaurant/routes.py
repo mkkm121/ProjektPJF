@@ -1,4 +1,3 @@
-import os
 from flask import render_template, flash, redirect, url_for, request
 from Restaurant.forms import RegistrationForm, LoginForm, UpdateAccountForm,\
     RequestResetForm, ResetPasswordForm, MessageForm
@@ -6,102 +5,8 @@ from Restaurant import app, db, bcrypt, mail
 from Restaurant.models import User
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
-menu = [
-    {
-        'name':'HOME',
-        'url':'home'
-    },
-    {
-        'name':'O nas',
-        'url': 'about'
-    },
-{
-        'name':'Oferta',
-        'url':'menu'
-    },
-{
-        'name':'Zamów',
-        'url':'order'
-    },
-{
-        'name':'Kontakt',
-        'url':'contact'
-    }
-]
-about_content = [
-    {
-        'name':'item-1',
-        'description':"Pierwszy slajd",
-        'val': 'Burgir burgirowy \n Drugi burgir tez sie znajdzie',
-        'prev':'item-3',
-        'next':'item-2'
-    },
-    {
-        'name':'item-2',
-        'description':"Drugi slajd",
-        'val': 'Kebaby z minsem \n Ide po kebaby jakie baby',
-        'prev':'item-1',
-        'next':'item-3'
-    },
-    {
-        'name':'item-3',
-        'description':"Trzeci slajd",
-        'val': 'Pizzka z ananasem.\n Zamow juz dzisiaj, swiezutka cieplutka',
-        'prev':'item-2',
-        'next':'item-1'
-    },
-]
-menu_elements = [
-    {
-        'image':'background-image: url(/static/food.jpg)',
-    },
-{
-        'image':'Śniadanie'
+from Restaurant.dicts import menu, images, menu_elements, menu_elements2, about_content
 
-    },
-{
-        'image':'background-image: url(/static/food2.jfif)'
-    },
-{
-        'image':'Obiad'
-    },
-]
-menu_elements2 = [
-{
-    'image':'Kolacja'
-    },
-{
-    'image':'background-image: url(/static/food3.jpg)'
-    },
-{
-    'image':'Przystawki'
-
-    },
-{
-    'image': 'background-image: url(/static/food.jpg)'
-    },
-]
-
-images = [
-    {
-        'img':'static/food.jpg',
-        'name':'img-1',
-        'prev':'img-3',
-        'next':'img-2',
-    },
-    {
-        'img': 'static/food2.jfif',
-        'name':'img-2',
-        'prev':'img-1',
-        'next':'img-3',
-    },
-    {
-        'img': 'static/food3.jpg',
-        'name':'img-3',
-        'prev':'img-2',
-        'next':'img-1',
-    }
-]
 @app.route('/')
 @app.route('/home')
 def home():
@@ -204,7 +109,7 @@ def account():
 def send_reset_email(user):
     token = user.get_reset_token()
     msg = Message('Zmiana hasła', sender='noreply@demo.com', recipients=[user.email])
-    msg.body = f'''Żeby zeresetować hasło, wejdź w poniższy:
+    msg.body = f'''Żeby zeresetować hasło, wejdź w poniższy link:
     {url_for('reset_token',token=token,_external=True)}
     Jeżeli nie chciałes zmienić hasła, zignoruj tego maila.
     '''
