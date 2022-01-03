@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect, url_for, request
 from Restaurant.forms import RegistrationForm, LoginForm, UpdateAccountForm,\
     RequestResetForm, ResetPasswordForm, MessageForm
 from Restaurant import app, db, bcrypt, mail
-from Restaurant.models import User
+from Restaurant.models import User, Product
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 from Restaurant.dicts import menu, images, menu_elements, menu_elements2, about_content
@@ -22,7 +22,8 @@ def menu_rend():
 
 @app.route('/order')
 def order():
-    return render_template('order.html', menu=menu, title='Order')
+    products = Product.query.all()
+    return render_template('order.html', menu=menu, title='Order', products=products)
 
 def send_message(name, text, email, address, topic):
     msg = Message(topic, sender='noreply@demo.com', recipients=['snackzen0@gmail.com'])

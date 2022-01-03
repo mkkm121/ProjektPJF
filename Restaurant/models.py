@@ -4,6 +4,7 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask_admin.contrib.sqla import ModelView
 from flask_login import current_user
 
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -30,10 +31,19 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f"User('{self.username}','{self.email}')"
 
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), unique=True, nullable=False)
+    cost = db.Column(db.NUMERIC(2), nullable=False)
+    description = db.Column(db.String(200))
+    category = db.Column(db.String(40))
+    image = db.Column(db.String(50), nullable=False, default='static/food.jpg')
+
+    def __repr__(self):
+        return f"User('{self.name}', '{self.cost}', '{self.description}')"
 
 class MyModelView(ModelView):
     def is_accessible(self):
         if current_user.is_authenticated:
             if current_user.username == 'admin':
                 return True
-
