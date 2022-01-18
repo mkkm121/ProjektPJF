@@ -35,5 +35,22 @@
                 <form action="{{url_for('order_again', invoice=invoice)}}" method="POST">
                     <button class="btn" type='submit'>Zamów ponownie</button>
                 </form>
+                {% if orders.status =='Zapłacone' %}
+                   {% else %}
+                <form action="{{url_for('payment')}}" method="POST">
+                    {% set amount =  total.replace('.','') %}
+                    <input type="hidden" name="amount" value="{{amount}}">
+                    <input type="hidden" name="invoice" value="{{orders.invoice}}">
+                    <script src="https://checkout.stripe.com/checkout.js"
+                      class="stripe-button"
+                      data-key="pk_test_51KJOqPEYj7vDaQKMeUXoae6KDiwR4ZzdYMuL253SpbAaXVPkTuFe2HJmzKhJy5CZsDN8e2UDs3O31mBooP4KUeAm00quIG2yWO"
+                      data-name="{{customer.name}}"
+                      data-description="Snackzen order"
+                      data-amount="{{amount}}"
+                      data-currency="usd">
+                    </script>
+              </form>
+            {% endif %}
+              </form>
     </div></div>
 {% endblock %}

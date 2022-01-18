@@ -8,6 +8,34 @@ from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 from Restaurant.dicts import menu, images, menu_elements, menu_elements2, about_content
 import pdfkit
+import stripe
+
+publishable_key ='pk_test_51KJOqPEYj7vDaQKMeUXoae6KDiwR4ZzdYMuL253SpbAaXVPkTuFe2HJmzKhJy5CZsDN8e2UDs3O31mBooP4KUeAm00quIG2yWO'
+stripe.api_key ='sk_test_51KJOqPEYj7vDaQKMyvJ1mEnuYCicRV52A2edrB1gV3zeQysFf100zn8cxQzdYpkiBQg7oZGQ6Ux1ux25L6iGyvl600dpXiuAab'
+
+
+@app.route('/payment', methods=['POST'])
+def payment():
+    invoice = request.form.get('invoice')
+    amount = request.form.get('amount')
+    customer = stripe.Customer.create(
+      email=request.form['stripeEmail'],
+      source=request.form['stripeToken'],
+    )
+    charge = stripe.Charge.create(
+      customer=customer.id,
+      description='Snackzen Order',
+      amount=amount,
+      currency='PLN',
+    )
+    order = CustomerOrder.query.filter_by(invoice=invoice).first()
+    order.status = 'Zapłacone'
+    db.session.commit()
+    return redirect(url_for('thanks'))
+
+@app.route('/thanks')
+def thanks():
+    return render_template('thank.html')
 
 @app.route('/')
 @app.route('/home')
@@ -187,8 +215,11 @@ def getcart():
         return redirect(request.referrer)
     total = 0
     for key, product in session['cart'].items():
-        total += float(product['price']) * int(product['quantity'])
+        total += (product['price']) * int(product['quantity'])
+
+    total = str(total)
     return render_template('cart.html', menu=menu, title='Cart', form=form, total=total)
+
 
 
 @app.route('/updatecart/<int:code>', methods=['POST'])
@@ -231,6 +262,13 @@ def clearcart():
     except Exception as e:
         print(e)
 
+def updateshoppingcart():
+    for key, shopping in session['Shoppingcart'].items():
+        session.modified = True
+        del shopping['image']
+        del shopping['colors']
+    return updateshoppingcart
+
 @app.route('/getorder')
 @login_required
 def getorder():
@@ -261,7 +299,7 @@ def orders(invoice):
            total += float(product['price']) * int(product['quantity'])
     else:
         return redirect(url_for('login'))
-    return render_template('user-order.html', menu=menu, invoice=invoice, total=total, customer=customer, orders=orders)
+    return render_template('user-order.html', menu=menu, invoice=invoice, total=str(total), customer=customer, orders=orders)
 
 
 @app.route('/get_pdf/<invoice>', methods=['POST'])
@@ -296,3 +334,4 @@ def order_again(invoice):
     for key, product in session['cart'].items():
         total += float(product['price']) * int(product['quantity'])
     return render_template('cart.html', menu=menu, title='Cart', form=form, total=total)
+

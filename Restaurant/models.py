@@ -40,6 +40,7 @@ class Product(db.Model):
     description = db.Column(db.String(200))
     category = db.Column(db.String(40))
     image = db.Column(db.String(50), nullable=False, default='static/food.jpg')
+    estimated_time = db.Column(db.String(20), unique=False, nullable=True)
 
     def __repr__(self):
         return f"User('{self.name}', '{self.cost}', '{self.description}')"

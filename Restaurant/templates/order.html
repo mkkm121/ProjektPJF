@@ -15,14 +15,13 @@
                     </div>
                      <div class="food-desc">
                          <small><i class="icon-price"></i>  {{ product.cost }} zł</small>
-                        <small><i class="icon-time"></i> {{ product.category }} </small>
+                        <small><i class="icon-time"></i> {{ product.estimated_time }} min </small>
                     </div>
                     <div class="food-desc">
                         <form action="{{ url_for('AddCart') }}" method="POST">
                             <input type="hidden" name="id" value="{{ product.id }}">
                             <button><span>Dodaj do koszyka</span></button>
                         </form>
-                            <button><span>Zamów</span></button>
                     </div>
                 </div>
             </div>
