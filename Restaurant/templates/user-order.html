@@ -6,7 +6,7 @@
             Nazwa użytkownika: {{ customer.username }} <br>
             E-mail: {{ customer.email }} <br>
             <h4>Zamówienie: </h4>
-            Data zamówienia: {{ orders.date_created.strftime("%b %d %Y") }} <br>
+            Data zamówienia: {{ orders.date_created.strftime("%b %d %Y %H:%M:%S") }} <br>
             Status: {{ orders.status }} <br>
             <br>
             <br>
@@ -31,6 +31,9 @@
             <h3 style ="text-align: right">Razem: {{ total }} zł</h3>
                 <form action="{{url_for('get_pdf', invoice=invoice)}}" method="POST">
                     <button class="btn" type='submit'>Wydrukuj PDF</button>
+                </form>
+                <form action="{{url_for('order_again', invoice=invoice)}}" method="POST">
+                    <button class="btn" type='submit'>Zamów ponownie</button>
                 </form>
     </div></div>
 {% endblock %}

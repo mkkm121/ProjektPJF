@@ -285,3 +285,14 @@ def get_pdf(invoice):
             response.headers['content-Disposition'] = 'inline: filename=' + invoice + '.pdf'
             return response
         return request(url_for('orders'))
+
+@app.route("/<invoice>", methods=['POST'])
+@login_required
+def order_again(invoice):
+    form = MessageForm()
+    orders = CustomerOrder.query.filter_by(invoice=invoice).first()
+    session['cart'] = orders.orders
+    total = 0
+    for key, product in session['cart'].items():
+        total += float(product['price']) * int(product['quantity'])
+    return render_template('cart.html', menu=menu, title='Cart', form=form, total=total)
