@@ -35,8 +35,12 @@
                 <form action="{{url_for('order_again', invoice=invoice)}}" method="POST">
                     <button class="btn" type='submit'>Zamów ponownie</button>
                 </form>
-                {% if orders.status =='Zapłacone' %}
-                   {% else %}
+                {% if orders.status =='Zapłacone' or orders.status == 'Płatność przy odbiorze' %}
+                {% else %}
+                <form action="{{url_for('payment_delivery')}}" method="POST">
+                    <input type="hidden" name="invoice" value="{{orders.invoice}}">
+                    <button class="btn" type='submit'>Płatność przy odbiorze</button>
+                </form>
                 <form action="{{url_for('payment')}}" method="POST">
                     {% set amount =  total.replace('.','') %}
                     <input type="hidden" name="amount" value="{{amount}}">

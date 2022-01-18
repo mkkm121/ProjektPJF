@@ -33,9 +33,17 @@ def payment():
     db.session.commit()
     return redirect(url_for('thanks'))
 
+@app.route('/payment_delivery', methods=['POST'])
+def payment_delivery():
+    invoice = request.form.get('invoice')
+    order = CustomerOrder.query.filter_by(invoice=invoice).first()
+    order.status = 'Płatność przy odbiorze'
+    db.session.commit()
+    return redirect(url_for('thanks'))
+
 @app.route('/thanks')
 def thanks():
-    return render_template('thank.html')
+    return render_template('thank.html',menu=menu)
 
 @app.route('/')
 @app.route('/home')
