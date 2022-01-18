@@ -353,13 +353,6 @@ thead {
     font-size: 0.875rem;
     text-transform: uppercase;
 }
-th {
-  letter-spacing: 2px;
-}
-
-td {
-  letter-spacing: 1px;
-}
 
 tbody td {
   text-align: center;

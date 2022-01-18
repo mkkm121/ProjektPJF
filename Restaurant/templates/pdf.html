@@ -1,0 +1,32 @@
+<head>
+    <meta charset="UTF-8">
+</head>
+{% block content %}
+            <h4>Dane Klienta: </h4>
+            Nazwa użytkownika: {{ customer.username }} <br>
+            E-mail: {{ customer.email }} <br>
+            <h4>Zamówienie: </h4>
+            Data zamówienia: {{ orders.date_created }} <br>
+            Status: {{ orders.status }} <br>
+            <br>
+            <br>
+                <table style = "  table-layout: fixed; width: 100%; border-collapse: collapse; border: 3px solid #800000;">
+                <thead style = "    background-color: #800000;color: rgb(250,247, 232);font-size: 0.875rem;text-transform: uppercase;">
+                    <th style = "letter-spacing: 2px;">Nr</th>
+                    <th style = "letter-spacing: 2px;">Nazwa</th>
+                    <th style = "letter-spacing: 2px;">Ilość</th>
+                    <th style = "letter-spacing: 2px;">Cena</th>
+                </thead>
+                <tbody>
+                    {% for key, product in orders.orders.items() %}
+                        <tr>
+                            <td style = "letter-spacing: 1px; border: 1px solid #800000;text-align: center;">{{ loop.index }}</td>
+                            <td style = "letter-spacing: 1px; border: 1px solid #800000;text-align: center;">{{ product.name }}</td>
+                            <td style = "letter-spacing: 1px; border: 1px solid #800000;text-align: center;">{{ product.quantity }}</td>
+                            <td style = "letter-spacing: 1px; border: 1px solid #800000;text-align: center;">{{ product.price }} zł</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <h3 style ="text-align: right">Razem: {{ total }} zł</h3>
+{% endblock %}

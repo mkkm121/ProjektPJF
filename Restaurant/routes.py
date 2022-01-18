@@ -1,5 +1,5 @@
 import secrets
-from flask import render_template, flash, redirect, url_for, request, session
+from flask import render_template, flash, redirect, url_for, request, session, make_response
 from Restaurant.forms import RegistrationForm, LoginForm, UpdateAccountForm,\
     RequestResetForm, ResetPasswordForm, MessageForm
 from Restaurant import app, db, bcrypt, mail
@@ -7,7 +7,7 @@ from Restaurant.models import User, Product, CustomerOrder
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 from Restaurant.dicts import menu, images, menu_elements, menu_elements2, about_content
-
+import pdfkit
 
 @app.route('/')
 @app.route('/home')
@@ -261,3 +261,26 @@ def orders(invoice):
     else:
         return redirect(url_for('login'))
     return render_template('user-order.html', menu=menu, invoice=invoice, total=total, customer=customer, orders=orders)
+
+
+@app.route('/get_pdf/<invoice>', methods=['POST'])
+@login_required
+def get_pdf(invoice):
+    if current_user.is_authenticated:
+        total = 0
+        customer_id = current_user.id
+        if request.method == 'POST':
+            customer = User.query.filter_by(id=customer_id).first()
+            orders = CustomerOrder.query.filter_by(customer_id=customer_id).order_by(CustomerOrder.id.desc()).first()
+            for _key, product in orders.orders.items():
+                total = float(product['price']) * int(product['quantity'])
+
+            rendered = render_template('pdf.html', menu=menu, invoice=invoice, total=total, customer=customer,
+                                       orders=orders)
+            config = pdfkit.configuration(wkhtmltopdf="C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe")
+            pdf = pdfkit.from_string(rendered, False, configuration=config)
+            response = make_response(pdf)
+            response.headers['content-Type'] = 'application/pdf'
+            response.headers['content-Disposition'] = 'inline: filename=' + invoice + '.pdf'
+            return response
+        return request(url_for('orders'))

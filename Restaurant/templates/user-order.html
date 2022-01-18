@@ -1,15 +1,16 @@
 {% extends "layout.html" %}
 {% block content %}
     <div id="information-box">
-
     <div class="information-box-content3">
-    <div class="container">
-        <div class="row">
-            <table class="table">
-            Invoice: {{ invoice }} <br>
-            Status: {{ orders.status }} <br>
+            <h4>Dane Klienta: </h4>
             Nazwa użytkownika: {{ customer.username }} <br>
             E-mail: {{ customer.email }} <br>
+            <h4>Zamówienie: </h4>
+            Data zamówienia: {{ orders.date_created }} <br>
+            Status: {{ orders.status }} <br>
+            <br>
+            <br>
+                <table class="table">
                 <thead>
                     <th>Nr</th>
                     <th>Nazwa</th>
@@ -27,8 +28,9 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <h3>Razem: {{ total }} zł</h3>
-        </div>
-    </div>
+            <h3 style ="text-align: right">Razem: {{ total }} zł</h3>
+                <form action="{{url_for('get_pdf', invoice=invoice)}}" method="POST">
+                    <button class="btn" type='submit'>Wydrukuj PDF</button>
+                </form>
     </div></div>
 {% endblock %}
