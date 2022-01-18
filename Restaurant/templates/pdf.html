@@ -6,7 +6,7 @@
             Nazwa użytkownika: {{ customer.username }} <br>
             E-mail: {{ customer.email }} <br>
             <h4>Zamówienie: </h4>
-            Data zamówienia: {{ orders.date_created }} <br>
+            Data zamówienia: {{ orders.date_created.strftime("%b %d %Y") }} <br>
             Status: {{ orders.status }} <br>
             <br>
             <br>

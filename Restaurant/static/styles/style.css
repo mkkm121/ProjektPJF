@@ -253,6 +253,16 @@ a:hover {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    overflow-y: auto;
+}
+
+.information-box-content4{
+    align-self: center;
+    width: 80%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 .information-box-content-text{
     padding: 10%;
@@ -262,6 +272,21 @@ a:hover {
     display: grid;
     width: 100%;
     grid-template-columns: auto auto;
+}
+.information-box-content-text3{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    overflow-y: auto;
+}
+.information-box-content-menu{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
 }
 .information-box-content-image{
     width: 100%;
@@ -546,6 +571,22 @@ input:checked + .slide-container .nav label { display: block; }
     color: rgb(250,247, 232);
     border: maroon;
     padding: .5rem;
+}
+
+.btn2{
+    width: 50%;
+    margin: 1%;
+    font-size: .85rem;
+    background-color: #ff3300;
+    color: rgb(250,247, 232);
+    border: maroon;
+    border-radius: 5px;
+}
+.btn2:hover{
+    font-size: .85rem;
+    background-color: maroon;
+    color: rgb(250,247, 232);
+    border: maroon;
 }
 .form-check{
     align-self: flex-start;

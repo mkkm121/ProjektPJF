@@ -1,21 +1,35 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div id="information-box">
-    <div class="information-box-content3">
-     {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    <div>
-                    {% for category, message in messages %}
-                        <div class="alert alert-{{ category }}">
-                            {{ message }}
+    <div id="information-box2">
+    <div class="information-box-content4">
+        <div class="information-box-content-text3">
+         {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div>
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
                         </div>
-                    {% endfor %}
-                    </div>
-                {% endif %}
-            {% endwith %}
-        <h1>Moje konto</h1>
-        <h3>Nazwa użytkownika: {{ current_user.username }}</h3>
-        <p>E-mail: {{ current_user.email }}</p>
+                    {% endif %}
+                {% endwith %}
+            <h1>Moje konto</h1>
+            <h3>Nazwa użytkownika: {{ current_user.username }}</h3>
+            <p>E-mail: {{ current_user.email }}</p>
+        </div>
+    <div class="information-box-content-text3">
+        <h4>Lista zamówień:</h4>
+        <div class="information-box-content-menu">
+            {% for order in orders %}
+                <form action="orders/{{ order.invoice }}">
+                    <button class="btn2" type='submit' ><i class="icon-food"></i>{{ order.date_created.strftime("%b %d %Y") }}</button>
+                </form>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+    <div class="information-box-content4">
         <form method="post" action="" class ='form-group-text'>
             {{ form.hidden_tag() }}
             <fieldset class ='form-group'>

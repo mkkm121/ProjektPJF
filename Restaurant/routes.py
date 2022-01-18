@@ -98,6 +98,7 @@ def logout():
 @login_required
 def account():
     form = UpdateAccountForm()
+    orders = CustomerOrder.query.filter_by(customer_id=current_user.id)
     if form.validate_on_submit():
         current_user.username = form.username.data
         current_user.email = form.email.data
@@ -107,7 +108,7 @@ def account():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
-    return render_template('Account.html', title='Account', menu=menu, form=form)
+    return render_template('Account.html', title='Account', menu=menu, form=form, orders=orders)
 
 def send_reset_email(user):
     token = user.get_reset_token()
@@ -255,9 +256,9 @@ def orders(invoice):
        total = 0
        customer_id = current_user.id
        customer = User.query.filter_by(id=customer_id).first()
-       orders = CustomerOrder.query.filter_by(customer_id=customer_id).order_by(CustomerOrder.id.desc()).first()
+       orders = CustomerOrder.query.filter_by(invoice=invoice).first()
        for _key, product in orders.orders.items():
-           total = float(product['price']) * int(product['quantity'])
+           total += float(product['price']) * int(product['quantity'])
     else:
         return redirect(url_for('login'))
     return render_template('user-order.html', menu=menu, invoice=invoice, total=total, customer=customer, orders=orders)
@@ -271,9 +272,9 @@ def get_pdf(invoice):
         customer_id = current_user.id
         if request.method == 'POST':
             customer = User.query.filter_by(id=customer_id).first()
-            orders = CustomerOrder.query.filter_by(customer_id=customer_id).order_by(CustomerOrder.id.desc()).first()
+            orders = CustomerOrder.query.filter_by(invoice=invoice).order_by(CustomerOrder.id.desc()).first()
             for _key, product in orders.orders.items():
-                total = float(product['price']) * int(product['quantity'])
+                total += float(product['price']) * int(product['quantity'])
 
             rendered = render_template('pdf.html', menu=menu, invoice=invoice, total=total, customer=customer,
                                        orders=orders)
