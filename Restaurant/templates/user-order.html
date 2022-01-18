@@ -1,11 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
     <div id="information-box">
+
+    <div class="information-box-content3">
     <div class="container">
         <div class="row">
             <table class="table">
             Invoice: {{ invoice }} <br>
-            Status: {{ orders.status }}
+            Status: {{ orders.status }} <br>
             Nazwa użytkownika: {{ customer.username }} <br>
             E-mail: {{ customer.email }} <br>
                 <thead>
@@ -19,13 +21,14 @@
                         <tr>
                             <td>{{ loop.index }}</td>
                             <td>{{ product.name }}</td>
-                            <td>{{ product.quantity }}"</td>
+                            <td>{{ product.quantity }}</td>
                             <td>{{ product.price }} zł</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
+            <h3>Razem: {{ total }} zł</h3>
         </div>
     </div>
-    </div>
+    </div></div>
 {% endblock %}

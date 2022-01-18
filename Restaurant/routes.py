@@ -1,5 +1,4 @@
 import secrets
-
 from flask import render_template, flash, redirect, url_for, request, session
 from Restaurant.forms import RegistrationForm, LoginForm, UpdateAccountForm,\
     RequestResetForm, ResetPasswordForm, MessageForm
