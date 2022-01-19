@@ -44,6 +44,7 @@
                     </form>
                     <form class="form-btn" action="{{url_for('payment')}}" method="POST">
                         {% set amount =  total.replace('.','') %}
+                        {% set amount =  amount + '0' %}
                         <input type="hidden" name="amount" value="{{amount}}">
                         <input type="hidden" name="invoice" value="{{orders.invoice}}">
                         <script src="https://checkout.stripe.com/checkout.js"

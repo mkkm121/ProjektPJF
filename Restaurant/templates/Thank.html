@@ -13,8 +13,11 @@
                     </div>
                 {% endif %}
             {% endwith %}
-    <h1 style="color: #ff3300">Dziekujemy!!!</h1><br>
+    <h1 style="color: #ff3300">Dziękujemy!</h1><br>
     <p>Twoje zamówienie zostanie przygotowne i dostarczone najszybciej jak się da!</p><br>
+    <form action="{{url_for('account')}}">
+        <button class="btn" type='submit'>Przejdź do profilu</button>
+    </form>
 </div>
 </div>
 {% endblock %}

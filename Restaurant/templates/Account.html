@@ -20,7 +20,7 @@
         </div>
     <div class="information-box-content-text3">
         <h4>Lista zamówień:</h4>
-        <div class="information-box-content-menu">
+        <div  class="information-box-content-menu">
             {% for order in orders %}
                 <form action="orders/{{ order.invoice }}">
                     <button class="btn2" type='submit' ><i class="icon-food"></i>{{ order.date_created.strftime("%b %d %Y") }}</button>

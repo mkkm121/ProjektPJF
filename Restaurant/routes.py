@@ -342,7 +342,7 @@ def get_pdf(invoice):
             for _key, product in orders.orders.items():
                 total += float(product['price']) * int(product['quantity'])
 
-            rendered = render_template('pdf.html', menu=menu, invoice=invoice, total=total, customer=customer,
+            rendered = render_template('pdf.html', invoice=invoice, total=total, customer=customer,
                                        orders=orders)
             config = pdfkit.configuration(wkhtmltopdf="C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe")
             pdf = pdfkit.from_string(rendered, False, configuration=config)

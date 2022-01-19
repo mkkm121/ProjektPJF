@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
     <div id="information-box2">
+    <div class="information-box-content5">
     {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     <div>
@@ -40,19 +41,25 @@
                             </form>
                         </tr>
                     {% endfor %}
-                    <tr>
-                         <form action="{{url_for('getorder')}}">
-                        <td><button class="btn" type='submit' >Złóż zamówienie</button></td>
-                        </form>
-                        <td><a href="order">Kontynuuj zakupy</a></td>
+                    <tfoot>
+                    <form action="{{url_for('order')}}">
+                        <td><button class="btn" type='submit' >Kontynuuj zakupy</button></td>
+                    </form>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td><h3>Razem: {{ total }}</h3></td>
+                         <form action="{{url_for('getorder')}}">
+                            <td><button class="btn" type='submit' >Złóż zamówienie</button></td>
+                        </form>
                         <form action="{{url_for('clearcart', id=key)}}">
                             <td><button class="btn" type='submit' ><i class="icon-delete-all"></i>Wyczyść koszyk</button></td>
                         </form>
-                    </tr>
+                    </tfoot>
                 </tbody>
             </table>
         </div>
+    </div>
     </div>
     </div>
 {% endblock %}

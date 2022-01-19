@@ -264,6 +264,14 @@ a:hover {
     flex-direction: row;
     justify-content: space-around;
 }
+.information-box-content5{
+    align-self: center;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    overflow-y: auto;
+}
 .information-box-content-text{
     padding: 10%;
     overflow-y: auto;
@@ -285,7 +293,7 @@ a:hover {
     height: 80%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: right;
     overflow-y: auto;
 }
 .information-box-content-image{
@@ -396,9 +404,9 @@ tbody td {
   text-align: center;
 }
 
-tfoot th {
+tfoot td {
     border: none;
-  text-align: right;
+  text-align: center;
 }
 .slide-image img {
     width: auto;
@@ -721,6 +729,7 @@ input:checked + .slide-container .nav label { display: block; }
     flex-direction: row;
 }
 .form-popup-title{
+    color: #ff3300;
     margin-top: 1%;
     font-size: 25px;
     font-weight: bold;
