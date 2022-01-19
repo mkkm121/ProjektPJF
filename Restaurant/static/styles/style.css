@@ -56,6 +56,10 @@ input[type=text]:focus,input[type=password]:focus , input[type=tel]:focus{
   color: white;
   border: none;
   height: 5vh;
+    border-radius: 5px;
+}
+.submit:hover {
+  opacity: 0.9;
 }
 .inputrow{
     padding: 1%;
@@ -167,13 +171,13 @@ a:hover {
     color: #ff3300;
 }
 #information-text{
-    height: 20%;
+    height: 15%;
     background-color: white;
 }
 #menu-layout{
     display: flex;
     flex-direction: column;
-    height: 80%;
+    height: 85%;
     width: 100%;
 }
 .form-group{
@@ -397,7 +401,7 @@ th {
 
 td {
   letter-spacing: 1px;
-    border: 1px solid #800000;
+    justify-content: space-between;
 }
 
 tbody td {
@@ -709,7 +713,6 @@ input:checked + .slide-container .nav label { display: block; }
 }
 .form-popup{
     text-align: center;
-    box-shadow: 4px 3px 2px maroon;
     background-color: rgb(250,247, 232) ;
     width: 70%;
     height: 60%;
@@ -717,7 +720,6 @@ input:checked + .slide-container .nav label { display: block; }
     position: fixed;
     bottom: 20%;
     right: 15%;
-    border: 1px outset maroon;
     z-index: 9;
 }
 .form-popup p{
@@ -738,13 +740,14 @@ input:checked + .slide-container .nav label { display: block; }
     height: 9%;
 }
 .form-popup-img{
-    border: 1px outset maroon;
      background-size: cover;
     background-repeat: no-repeat;
+    border-radius: 5px;
     width: 50%;
     height: 85%;
 }
 .form-popup-text{
+    font-size: 14px;
     align-self: center;
     margin-right: 3%;
     margin-left: 2%;
@@ -765,7 +768,7 @@ input:checked + .slide-container .nav label { display: block; }
     width: 20%;
 }
 .stripe-button-el{
-        font-size: 1rem;
+    font-size: 1rem;
     background-color: #ff3300;
     color: rgb(250,247, 232);
     border: maroon;

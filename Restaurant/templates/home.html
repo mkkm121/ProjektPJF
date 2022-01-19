@@ -14,9 +14,13 @@
                     </div>
                 {% endif %}
             {% endwith %}
-            <h1 style="color: #ff3300">Informacja</h1><br>Snackzen to Restauracja amerykańska w miejscowości Warszawa. Specjalizujemy się w śniadaniach, obiadach, kolacjach i wszelkich przekąskach. Używamy najświeższych składników, aby przyrządzać wyjątkowe dania w swobodnym, przyjaznym dla rodzin otoczeniu.
+            <h2 style="color: #ff3300">Informacja</h2><br>Snackzen to Restauracja amerykańska w miejscowości Warszawa. Specjalizujemy się w śniadaniach, obiadach, kolacjach i wszelkich przekąskach. Używamy najświeższych składników, aby przyrządzać wyjątkowe dania w swobodnym, przyjaznym dla rodzin otoczeniu.
                         <br><br>Nasza unikalna mieszanka lokalnych produktów i innowacyjne podejście do klasycznych potraw pomagają nam bezbłędnie łączyć odważne pomysły z tradycyjnymi przepisami. Czas wejść, usiąść i przygotować się na wspaniałe jedzenie!
-                <br><br><br><a id="contact" href="contact">Skontaktuj sie!</a>
+                <br><br><br>
+            <form action="contact">
+                <button type="submit" class="btn btn-outline-warning" onclick="{{url_for('contact')}}">Skontaktuj sie!</button>
+            </form>
+
             </div>
         </div>
          <div class="information-box-content">

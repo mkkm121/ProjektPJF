@@ -32,7 +32,7 @@
                             <td><img src="{{ product.image }}" width="50px" height="50px"></td>
                             <td>{{ product.name }}</td>
                             <form action="{{ url_for('updatecart', code=key) }}" method="POST">
-                            <td><input type="number" name="quantity" min="1" value="{{ product.quantity }}"></td>
+                            <td><input style="width: 80%" type="number" name="quantity" min="1" value="{{ product.quantity }}"></td>
                             <td>{{ product.price }} zł</td>
                             <td><button type="submit" class="btn"><i class="icon-update"></i>Zmień</button> </td>
                             </form>
@@ -41,7 +41,7 @@
                             </form>
                         </tr>
                     {% endfor %}
-                    <tfoot>
+                    <tfoot class="table-light">
                     <form action="{{url_for('order')}}">
                         <td><button class="btn" type='submit' >Kontynuuj zakupy</button></td>
                     </form>
