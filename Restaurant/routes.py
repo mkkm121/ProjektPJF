@@ -45,7 +45,7 @@ def payment_delivery():
 
 @app.route('/thanks')
 def thanks():
-    return render_template('thank.html',menu=menu)
+    return render_template('thank.html', menu=menu)
 
 
 @app.route('/')
@@ -268,8 +268,12 @@ def deletecart(id):
         session.modified = True
         for key, item in session['cart'].items():
             if int(key) == id:
+                flash("Koszyk został zaktualizowany", 'success')
                 session['cart'].pop(key,None)
-                return redirect(url_for('getcart'))
+                if len(session['cart'])==0:
+                    return redirect(url_for('order'))
+                else:
+                    return redirect(url_for('getcart'))
     except Exception as e:
         print(e)
         return redirect(url_for('getcart'))

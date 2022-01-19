@@ -2,6 +2,17 @@
 {% block content %}
 <div style ="background-color: white"  id="information-box">
 <div class="information-box-content-text">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div>
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
     <h1 style="color: #ff3300">Dziekujemy!!!</h1><br>
     <p>Twoje zamówienie zostanie przygotowne i dostarczone najszybciej jak się da!</p><br>
 </div>
