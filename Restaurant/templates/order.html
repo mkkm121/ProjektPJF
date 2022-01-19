@@ -1,7 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
     <div id="information-box2">
-    <div id="cart"><a href="{{ url_for('getcart') }}"><i class="icon-cart"></i>Koszyk ({{ session['cart']|length}})</a></div>
+    <form id="cart" action="{{ url_for('getcart') }}">
+        <button style="width: 10%;"class="btn2" type='submit' ><i class="icon-cart"></i>Koszyk ({{ session['cart']|length}})</button>
+    </form>
         <div id="menu-box">
             {% for product in products %}
             <div class="menu-element2">

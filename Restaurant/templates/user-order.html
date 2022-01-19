@@ -31,16 +31,16 @@
                 <h3 style ="text-align: right">Razem: {{ total }} zł</h3>
                 <div class="buttons">
                     <form class="form-btn" action="{{url_for('get_pdf', invoice=invoice)}}" method="POST">
-                        <button class="btn" type='submit'>Wydrukuj PDF</button>
+                        <button class="btn" type='submit'><i class="icon-pdf"></i>Wydrukuj PDF</button>
                     </form>
                     <form class="form-btn" action="{{url_for('order_again', invoice=invoice)}}" method="POST">
-                        <button class="btn" type='submit'>Zamów ponownie</button>
+                        <button class="btn" type='submit'><i class="icon-update"></i>Zamów ponownie</button>
                     </form>
                     {% if orders.status =='Zapłacone' or orders.status == 'Płatność przy odbiorze' %}
                     {% else %}
                     <form class="form-btn" action="{{url_for('payment_delivery')}}" method="POST">
                         <input type="hidden" name="invoice" value="{{orders.invoice}}">
-                        <button class="btn" type='submit'>Płatność przy odbiorze</button>
+                        <button class="btn" type='submit'><i class="icon-cash"></i>Płatność przy odbiorze</button>
                     </form>
                     <form class="form-btn" action="{{url_for('payment')}}" method="POST">
                         {% set amount =  total.replace('.','') %}
@@ -58,7 +58,7 @@
                     <script>
                      document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
                     </script>
-                     <button type="submit" class="btn">Zapłać kartą</button>
+                     <button type="submit" class="btn"><i class="icon-card"></i>Zapłać kartą</button>
                   </form>
                   </div>
                 {% endif %}

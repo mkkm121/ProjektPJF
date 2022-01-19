@@ -699,10 +699,12 @@ input:checked + .slide-container .nav label { display: block; }
     font-size: small;
 }
 #cart{
-    height: 5%;
-    width: 90%;
+    height: 10%;
+    width: 95%;
     color: #ff3300;
-    text-align: right;
+    margin-right: 0;
+    display: flex;
+    justify-content: flex-end;
     text-decoration: none;
 }
 .form-popup{

@@ -42,7 +42,6 @@ def payment_delivery():
     db.session.commit()
     return redirect(url_for('thanks'))
 
-
 @app.route('/thanks')
 def thanks():
     return render_template('thank.html', menu=menu)
@@ -68,7 +67,6 @@ def menu_rend():
 def order():
     products = Product.query.all()
     return render_template('order.html', menu=menu, title='Order', products=products)
-
 
 def send_message(name, text, email, address, topic):
     msg = Message(topic, sender='noreply@demo.com', recipients=['snackzen0@gmail.com'])
@@ -269,7 +267,7 @@ def deletecart(id):
         for key, item in session['cart'].items():
             if int(key) == id:
                 flash("Koszyk został zaktualizowany", 'success')
-                session['cart'].pop(key,None)
+                session['cart'].pop(key, None)
                 if len(session['cart'])==0:
                     return redirect(url_for('order'))
                 else:
