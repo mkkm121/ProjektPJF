@@ -11,7 +11,7 @@
                 {% if loop.index % 2 == 1 %}
                     <div style = "{{ i.image }}" class="menu-element-image"></div>
                 {% elif loop.index % 2 == 0 %}
-                    <div class="menu-element"><p>{{ i.image }}<br><br><a id="contact" href="kebab">Zobacz wiecej!</a></p></div>
+                    <div class="menu-element" name=""><p>{{ i.image }}<br><br><a id="contact" onclick="{{ i.func }}">Zobacz wiecej!</a></p></div>
                 {% endif %}
             {% endfor %}
         </div>
@@ -20,10 +20,97 @@
                 {% if loop.index % 2 == 0 %}
                     <div style = "{{ i.image }}" class="menu-element-image"></div>
                 {% elif loop.index % 2 == 1 %}
-                    <div class="menu-element"><p>{{ i.image }}<br><br><a id="contact" href="kebab">Zobacz wiecej!</a></p></div>
+                    <div class="menu-element"><p>{{ i.image }}<br><br><a id="contact" onclick="{{ i.func }}">Zobacz wiecej!</a></p></div>
                 {% endif %}
             {% endfor %}
         </div>
     </div>
     </div>
+    <div class="form-popup" id="myForm">
+        <div class="form-popup-title">Śniadania</div>
+        <div class="form-popup-content">
+            <div class="form-popup-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus facilisis dolor at lobortis. Curabitur imperdiet tellus ut dictum euismod. Mauris nisi velit, congue et sapien sed, interdum dignissim lacus. Curabitur nisi risus, ullamcorper a ultrices ac, dignissim eu tortor. Etiam odio ante, pellentesque efficitur elit ut, fermentum lacinia elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas ultricies velit a tortor faucibus, sit amet iaculis eros sodales. Pellentesque malesuada augue commodo orci scelerisque, sit amet sollicitudin metus placerat. Integer velit lorem, placerat sit amet venenatis ultricies, molestie vel massa.
+                Vestibulum at porttitor diam. Duis gravida vitae quam ut sagittis. Donec sollicitudin, tellus vitae tempus aliquet, ante risus egestas magna, eget ullamcorper eros elit ut felis.
+            <div class="form-popup-btn"><button style="border: 1px solid maroon; width: 30%;align-self: center;" class="btn" onclick="closeForm()">Wróć</button></div>
+            </div>
+            <div style = "background-image: url(/static/food3.jpg)" class="form-popup-img">
+            </div>
+        </div>
+
+    </div>
+        <div class="form-popup" id="myForm2">
+         <div class="form-popup-title">Obiady</div>
+        <div class="form-popup-content">
+            <div style = "background-image: url(/static/food.jpg)" class="form-popup-img">
+            </div>
+            <div class="form-popup-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus facilisis dolor at lobortis. Curabitur imperdiet tellus ut dictum euismod. Mauris nisi velit, congue et sapien sed, interdum dignissim lacus. Curabitur nisi risus, ullamcorper a ultrices ac, dignissim eu tortor. Etiam odio ante, pellentesque efficitur elit ut, fermentum lacinia elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas ultricies velit a tortor faucibus, sit amet iaculis eros sodales. Pellentesque malesuada augue commodo orci scelerisque, sit amet sollicitudin metus placerat. Integer velit lorem, placerat sit amet venenatis ultricies, molestie vel massa.
+                Vestibulum at porttitor diam. Duis gravida vitae quam ut sagittis. Donec sollicitudin, tellus vitae tempus aliquet, ante risus egestas magna, eget ullamcorper eros elit ut felis.
+            <div class="form-popup-btn"><button style="border: 1px solid maroon; width: 30%;align-self: center;" class="btn" onclick="closeForm2()">Wróć</button></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="form-popup" id="myForm3">
+         <div class="form-popup-title">Kolacje</div>
+        <div class="form-popup-content">
+            <div class="form-popup-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus facilisis dolor at lobortis. Curabitur imperdiet tellus ut dictum euismod. Mauris nisi velit, congue et sapien sed, interdum dignissim lacus. Curabitur nisi risus, ullamcorper a ultrices ac, dignissim eu tortor. Etiam odio ante, pellentesque efficitur elit ut, fermentum lacinia elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas ultricies velit a tortor faucibus, sit amet iaculis eros sodales. Pellentesque malesuada augue commodo orci scelerisque, sit amet sollicitudin metus placerat. Integer velit lorem, placerat sit amet venenatis ultricies, molestie vel massa.
+                Vestibulum at porttitor diam. Duis gravida vitae quam ut sagittis. Donec sollicitudin, tellus vitae tempus aliquet, ante risus egestas magna, eget ullamcorper eros elit ut felis.
+            <div class="form-popup-btn"><button style="border: 1px solid maroon; width: 30%;align-self: center;" class="btn" onclick="closeForm3()">Wróć</button></div>
+            </div>
+            <div style = "background-image: url(/static/food6.jpg)" class="form-popup-img">
+            </div>
+        </div>
+
+    </div>
+     <div class="form-popup" id="myForm4">
+         <div class="form-popup-title">Przystawki</div>
+        <div class="form-popup-content">
+            <div style = "background-image: url(/static/food4.jpg)" class="form-popup-img">
+            </div>
+            <div class="form-popup-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus facilisis dolor at lobortis. Curabitur imperdiet tellus ut dictum euismod. Mauris nisi velit, congue et sapien sed, interdum dignissim lacus. Curabitur nisi risus, ullamcorper a ultrices ac, dignissim eu tortor. Etiam odio ante, pellentesque efficitur elit ut, fermentum lacinia elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas ultricies velit a tortor faucibus, sit amet iaculis eros sodales. Pellentesque malesuada augue commodo orci scelerisque, sit amet sollicitudin metus placerat. Integer velit lorem, placerat sit amet venenatis ultricies, molestie vel massa.
+                Vestibulum at porttitor diam. Duis gravida vitae quam ut sagittis. Donec sollicitudin, tellus vitae tempus aliquet, ante risus egestas magna, eget ullamcorper eros elit ut felis.
+             <div class="form-popup-btn"><button style="border: 1px solid maroon; width: 30%;align-self: center;" class="btn" onclick="closeForm4()">Wróć</button></div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+   document.getElementById("information-box2").style.opacity = "0.2";
+}
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+  document.getElementById("information-box2").style.opacity = "1";
+}
+function openForm2() {
+  document.getElementById("myForm2").style.display = "block";
+   document.getElementById("information-box2").style.opacity = "0.3";
+}
+function closeForm2() {
+  document.getElementById("myForm2").style.display = "none";
+  document.getElementById("information-box2").style.opacity = "1";
+}
+function openForm3() {
+  document.getElementById("myForm3").style.display = "block";
+   document.getElementById("information-box2").style.opacity = "0.3";
+}
+function closeForm3() {
+  document.getElementById("myForm3").style.display = "none";
+  document.getElementById("information-box2").style.opacity = "1";
+}
+function openForm4() {
+  document.getElementById("myForm4").style.display = "block";
+   document.getElementById("information-box2").style.opacity = "0.3";
+}
+function closeForm4() {
+  document.getElementById("myForm4").style.display = "none";
+  document.getElementById("information-box2").style.opacity = "1";
+}
+</script>
+
 {% endblock content %}

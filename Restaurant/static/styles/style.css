@@ -697,3 +697,66 @@ input:checked + .slide-container .nav label { display: block; }
     text-align: right;
     text-decoration: none;
 }
+.form-popup{
+    text-align: center;
+    box-shadow: 4px 3px 2px maroon;
+    background-color: rgb(250,247, 232) ;
+    width: 70%;
+    height: 60%;
+    display: none;
+    position: fixed;
+    bottom: 20%;
+    right: 15%;
+    border: 1px outset maroon;
+    z-index: 9;
+}
+.form-popup p{
+    text-align: left;
+}
+
+.form-popup-content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.form-popup-title{
+    margin-top: 1%;
+    font-size: 25px;
+    font-weight: bold;
+    height: 9%;
+}
+.form-popup-img{
+    border: 1px outset maroon;
+     background-size: cover;
+    background-repeat: no-repeat;
+    width: 50%;
+    height: 85%;
+}
+.form-popup-text{
+    align-self: center;
+    margin-right: 3%;
+    margin-left: 2%;
+    text-align: justify;
+    width: 45%;
+    height: 85%;
+}
+.form-popup-btn{
+    text-align: center;
+    margin-top: 5%;
+}
+.buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.form-btn{
+    width: 20%;
+}
+.stripe-button-el{
+        font-size: 1rem;
+    background-color: #ff3300;
+    color: rgb(250,247, 232);
+    border: maroon;
+    padding: .5rem;
+}

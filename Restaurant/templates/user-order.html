@@ -29,19 +29,20 @@
                 </tbody>
             </table>
             <h3 style ="text-align: right">Razem: {{ total }} zł</h3>
-                <form action="{{url_for('get_pdf', invoice=invoice)}}" method="POST">
+            <div class="buttons">
+                <form class="form-btn" action="{{url_for('get_pdf', invoice=invoice)}}" method="POST">
                     <button class="btn" type='submit'>Wydrukuj PDF</button>
                 </form>
-                <form action="{{url_for('order_again', invoice=invoice)}}" method="POST">
+                <form class="form-btn" action="{{url_for('order_again', invoice=invoice)}}" method="POST">
                     <button class="btn" type='submit'>Zamów ponownie</button>
                 </form>
                 {% if orders.status =='Zapłacone' or orders.status == 'Płatność przy odbiorze' %}
                 {% else %}
-                <form action="{{url_for('payment_delivery')}}" method="POST">
+                <form class="form-btn" action="{{url_for('payment_delivery')}}" method="POST">
                     <input type="hidden" name="invoice" value="{{orders.invoice}}">
                     <button class="btn" type='submit'>Płatność przy odbiorze</button>
                 </form>
-                <form action="{{url_for('payment')}}" method="POST">
+                <form class="form-btn" action="{{url_for('payment')}}" method="POST">
                     {% set amount =  total.replace('.','') %}
                     <input type="hidden" name="amount" value="{{amount}}">
                     <input type="hidden" name="invoice" value="{{orders.invoice}}">
@@ -51,9 +52,14 @@
                       data-name="{{customer.name}}"
                       data-description="Snackzen order"
                       data-amount="{{amount}}"
-                      data-currency="usd">
+                      data-currency="pln">
                     </script>
+                <script>
+                 document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
+                </script>
+                 <button type="submit" class="btn">Zapłać kartą</button>
               </form>
+              </div>
             {% endif %}
               </form>
     </div></div>

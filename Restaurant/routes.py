@@ -10,7 +10,7 @@ from Restaurant.dicts import menu, images, menu_elements, menu_elements2, about_
 import pdfkit
 import stripe
 
-publishable_key ='pk_test_51KJOqPEYj7vDaQKMeUXoae6KDiwR4ZzdYMuL253SpbAaXVPkTuFe2HJmzKhJy5CZsDN8e2UDs3O31mBooP4KUeAm00quIG2yWO'
+publishable_key = 'pk_test_51KJOqPEYj7vDaQKMeUXoae6KDiwR4ZzdYMuL253SpbAaXVPkTuFe2HJmzKhJy5CZsDN8e2UDs3O31mBooP4KUeAm00quIG2yWO'
 stripe.api_key ='sk_test_51KJOqPEYj7vDaQKMyvJ1mEnuYCicRV52A2edrB1gV3zeQysFf100zn8cxQzdYpkiBQg7oZGQ6Ux1ux25L6iGyvl600dpXiuAab'
 
 
@@ -33,6 +33,7 @@ def payment():
     db.session.commit()
     return redirect(url_for('thanks'))
 
+
 @app.route('/payment_delivery', methods=['POST'])
 def payment_delivery():
     invoice = request.form.get('invoice')
@@ -41,27 +42,33 @@ def payment_delivery():
     db.session.commit()
     return redirect(url_for('thanks'))
 
+
 @app.route('/thanks')
 def thanks():
     return render_template('thank.html',menu=menu)
+
 
 @app.route('/')
 @app.route('/home')
 def home():
     return render_template('home.html', menu=menu)
 
+
 @app.route('/about')
 def about():
     return render_template('About.html', about=about_content, menu=menu, images=images, title='About')
+
 
 @app.route('/menu')
 def menu_rend():
     return render_template('menu.html', menu=menu, menu_elements=menu_elements, menu_elements2=menu_elements2, title='Menu')
 
+
 @app.route('/order')
 def order():
     products = Product.query.all()
     return render_template('order.html', menu=menu, title='Order', products=products)
+
 
 def send_message(name, text, email, address, topic):
     msg = Message(topic, sender='noreply@demo.com', recipients=['snackzen0@gmail.com'])
@@ -73,6 +80,7 @@ def send_message(name, text, email, address, topic):
     {text}
     '''
     mail.send(msg)
+
 
 @app.route('/contact', methods=['GET','POST'])
 def contact():
@@ -91,9 +99,6 @@ def contact():
         return redirect(url_for('contact'))
     return render_template('contact.html', menu=menu, title='Contact', form=form)
 
-@app.route('/kebab')
-def kebab():
-    return '<h2>KIEBAB NA CIENKIM Z OSTRYM SOSEM</h2>'
 
 @app.route('/register', methods=['GET','POST'])
 def register():
@@ -108,6 +113,7 @@ def register():
         flash(f'Konto zostało utworzone. Możesz sie zalogować!', 'success')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form, menu=menu)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -124,17 +130,19 @@ def login():
             flash('Logowanie nieudane. Sprawdz login i haslo', 'danger')
     return render_template('login.html', title='Login', form=form, menu=menu)
 
+
 @app.route("/logout")
 def logout():
     logout_user()
     flash('Wylogowano', 'success')
     return redirect(url_for('home'))
 
+
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
     form = UpdateAccountForm()
-    orders = CustomerOrder.query.filter_by(customer_id=current_user.id)
+    orders = CustomerOrder.query.filter_by(customer_id=current_user.id).order_by(CustomerOrder.date_created.desc())
     if form.validate_on_submit():
         current_user.username = form.username.data
         current_user.email = form.email.data
@@ -146,6 +154,7 @@ def account():
         form.email.data = current_user.email
     return render_template('Account.html', title='Account', menu=menu, form=form, orders=orders)
 
+
 def send_reset_email(user):
     token = user.get_reset_token()
     msg = Message('Zmiana hasła', sender='noreply@demo.com', recipients=[user.email])
@@ -154,6 +163,7 @@ def send_reset_email(user):
     Jeżeli nie chciałes zmienić hasła, zignoruj tego maila.
     '''
     mail.send(msg)
+
 
 @app.route("/reset_password", methods=['GET','POST'])
 def reset_request():
@@ -166,6 +176,7 @@ def reset_request():
         flash('Wyslano email z instrukacją resetu hasła','success')
         return redirect(url_for('login'))
     return render_template('reset_request.html', title='Reset', menu=menu, form=form)
+
 
 @app.route("/reset_password/<token>", methods=['GET','POST'])
 def reset_token(token):
@@ -192,6 +203,7 @@ def MagerDicts(dict1, dict2):
         return dict(list(dict1.items())+list(dict2.items()))
     return False
 
+
 @app.route("/addcart", methods=['POST'])
 def AddCart():
     try:
@@ -216,6 +228,7 @@ def AddCart():
     finally:
         return redirect(request.referrer)
 
+
 @app.route("/cart")
 def getcart():
     form = MessageForm()
@@ -227,7 +240,6 @@ def getcart():
 
     total = str(total)
     return render_template('cart.html', menu=menu, title='Cart', form=form, total=total)
-
 
 
 @app.route('/updatecart/<int:code>', methods=['POST'])
@@ -262,6 +274,7 @@ def deletecart(id):
         print(e)
         return redirect(url_for('getcart'))
 
+
 @app.route('/clearcart')
 def clearcart():
     try:
@@ -270,12 +283,14 @@ def clearcart():
     except Exception as e:
         print(e)
 
+
 def updateshoppingcart():
     for key, shopping in session['Shoppingcart'].items():
         session.modified = True
         del shopping['image']
         del shopping['colors']
     return updateshoppingcart
+
 
 @app.route('/getorder')
 @login_required
@@ -294,6 +309,7 @@ def getorder():
             print(e)
             flash("Coś poszło nie tak",'danger')
             return redirect(url_for('getcart'))
+
 
 @app.route('/orders/<invoice>')
 @login_required
@@ -331,6 +347,7 @@ def get_pdf(invoice):
             response.headers['content-Disposition'] = 'inline: filename=' + invoice + '.pdf'
             return response
         return request(url_for('orders'))
+
 
 @app.route("/<invoice>", methods=['POST'])
 @login_required

@@ -31,3 +31,4 @@ admin.add_view(MyModelView(Product, db.session))
 admin.add_view(MyModelView(CustomerOrder, db.session))
 
 from Restaurant import routes
+

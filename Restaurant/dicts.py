@@ -48,25 +48,29 @@ menu_elements = [
         'image':'background-image: url(/static/food.jpg)',
     },
 {
-        'image':'Śniadanie'
+        'image':'Śniadanie',
+        'func' : 'openForm()'
 
     },
 {
         'image':'background-image: url(/static/food2.jfif)'
     },
 {
-        'image':'Obiad'
+        'image':'Obiad',
+        'func' : 'openForm2()'
     },
 ]
 menu_elements2 = [
 {
-    'image':'Kolacja'
+    'image':'Kolacja',
+    'func' : 'openForm3()'
     },
 {
     'image':'background-image: url(/static/food3.jpg)'
     },
 {
-    'image':'Przystawki'
+    'image':'Przystawki',
+    'func' : 'openForm4()'
 
     },
 {
