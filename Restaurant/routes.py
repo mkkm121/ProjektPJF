@@ -66,7 +66,8 @@ def menu_rend():
 @app.route('/order')
 def order():
     products = Product.query.all()
-    return render_template('order.html', menu=menu, title='Order', products=products)
+    products2 = Product.query.all()
+    return render_template('order.html', menu=menu, title='Order', products=products, products2=products2)
 
 def send_message(name, text, email, address, topic):
     msg = Message(topic, sender='noreply@demo.com', recipients=['snackzen0@gmail.com'])
@@ -268,7 +269,7 @@ def deletecart(id):
             if int(key) == id:
                 flash("Koszyk został zaktualizowany", 'success')
                 session['cart'].pop(key, None)
-                if len(session['cart'])==0:
+                if len(session['cart']) == 0:
                     return redirect(url_for('order'))
                 else:
                     return redirect(url_for('getcart'))

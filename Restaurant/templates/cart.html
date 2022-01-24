@@ -1,66 +1,81 @@
 {% extends "layout.html" %}
 {% block content %}
     <div id="information-box2">
-    <div class="information-box-content5">
-    {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    <div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div>
                     {% for category, message in messages %}
                         <div class="alert alert-{{ category }}">
                             {{ message }}
                         </div>
                     {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <div id="cart" style="overflow-y: auto;">
+        <span style="margin-bottom: 1%">
+            <form style="float: left;clear: both" action="{{url_for('order')}}">
+                        <button style="width: 20%" class="btn btn-primary hBack" type='submit' >&#11178;Powrót</button>
+                        <h1 style="text-align: left">Koszyk</h1>
+            </form>
+        </span>
+            <div class="container-fluid">
+                <div class="row align-items-center" style="text-align: center">
+                    <div class="col-12 col-sm-9 items" >
+                        {% for key, product in session['cart'].items() %}
+                            <div class="cartItem row align-items-center">
+                                <div class="col-3 mb-2 " >
+                                    <img class="w-100" src="{{ product.image }}" alt="{{ product.name }}">
+                                </div>
+                                <div class="col-3 mb-2 ">
+                                    <h6 class="">{{ product.name }}</h6>
+                                </div>
+                                <div class="col-2" style="display: flex;flex-direction: column">
+                                    <div class ="row">
+                                    <form action="{{ url_for('updatecart', code=key) }}" method="POST">
+                                    <input style="width: 80%" type="number" class="cartItemQuantity p-1 text-center" name="quantity" min="1" value="{{ product.quantity }}">
+                                    </div>
+                                    <div class ="row">
+                                        <button type="submit" style="margin-top: 10px;margin-bottom: -10px;width: 80%" class="btn"><i class="icon-update"></i>Zmień</button>
+                                    </div>
+                                    </form>
+                                </div>
+                                <div class="col-2">
+                                    <div class="row">
+                                    <p id="cartItem1Price">{{ product.price }} zł</p>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                        <form action="{{url_for('deletecart', id=key)}}">
+                                            <button style="color: red" type="submit" class="btn-close" aria-label="Close" ></button>
+                                        </form>
+                                    </div>
+                            </div>
+                            <hr>
+                        {% endfor %}
                     </div>
-                {% endif %}
-            {% endwith %}
-    <div class="container">
-        <div class="row">
-            <table class="table">
-                <thead>
-                    <th>Nr</th>
-                    <th>Zdjęcie</th>
-                    <th>Nazwa</th>
-                    <th>Ilość</th>
-                    <th>Cena</th>
-                    <th>Zmień</th>
-                    <th>Usuń</th>
-                </thead>
-                <tbody>
-                    {% for key, product in session['cart'].items() %}
-                        <tr>
-                            <td>{{ loop.index }}</td>
-                            <td><img src="{{ product.image }}" width="50px" height="50px"></td>
-                            <td>{{ product.name }}</td>
-                            <form action="{{ url_for('updatecart', code=key) }}" method="POST">
-                            <td><input style="width: 80%" type="number" name="quantity" min="1" value="{{ product.quantity }}"></td>
-                            <td>{{ product.price }} zł</td>
-                            <td><button type="submit" class="btn"><i class="icon-update"></i>Zmień</button> </td>
-                            </form>
-                            <form action="{{url_for('deletecart', id=key)}}">
-                            <td><button class="btn" type='submit' ><i class="icon-delete"></i>Usuń</button></td>
-                            </form>
-                        </tr>
-                    {% endfor %}
-                    <tfoot class="table-light">
-                    <form action="{{url_for('order')}}">
-                        <td><button class="btn" type='submit' >Kontynuuj zakupy</button></td>
-                    </form>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td><h3>Razem: {{ total }}</h3></td>
-                         <form action="{{url_for('getorder')}}">
-                            <td><button class="btn" type='submit' >Złóż zamówienie</button></td>
+                    <div style="text-align: left" class="col-12 col-sm-3 p-3 proceed form">
+                        <div class="row mx-0 mb-2">
+                            <div class="col-sm-6 p-0 d-inline">
+                                <h5>Total</h5>
+                            </div>
+                            <div class="col-sm-6 p-0">
+                                <p id="total"> {{ total }}zł</p>
+                            </div>
+                        </div>
+                        <form style="display: flex;justify-content: center" action="{{url_for('getorder')}}">
+                            <button id="btn-checkout" class="shopnow" type='submit'><span>Zamów</span></button>
                         </form>
-                        <form action="{{url_for('clearcart', id=key)}}">
-                            <td><button class="btn" type='submit' ><i class="icon-delete-all"></i>Wyczyść koszyk</button></td>
+                        <br>
+                        <form style="display: flex;justify-content: center" action="{{url_for('clearcart', id=key)}}">
+                            <button id="btn-checkout" class="clear" type='submit' ><span>Wyczyść koszyk</span></button>
                         </form>
-                    </tfoot>
-                </tbody>
-            </table>
-        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
     </div>
     </div>
-    </div>
+      </div>
 {% endblock %}
 

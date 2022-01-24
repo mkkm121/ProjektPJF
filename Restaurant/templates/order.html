@@ -1,34 +1,91 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div id="information-box2">
-    <form id="cart" action="{{ url_for('getcart') }}">
-        <button style="width: 10%;"class="btn2" type='submit' ><i class="icon-cart"></i>Koszyk ({{ session['cart']|length}})</button>
+    <div id="information-order">
+    <form id="cart-btn" action="{{ url_for('getcart') }}">
+        <button style="width: 20%;"class="btn2" type='submit' ><i class="icon-cart"></i>Koszyk ({{ session['cart']|length}})</button>
     </form>
         <div id="menu-box">
-            {% for product in products %}
-            <div class="menu-element2">
-                 <div class="menu-food">
-                    <div class="food-photo">
-                        <img src="{{ product.image }}" width="100%" height="100%">
-                    </div>
-                    <div class="food-desc">
-                        <h3>{{ product.name }}</h3>
-                        <p>{{ product.description }} </p>
-                    </div>
-                     <div class="food-desc">
-                         <small><i class="icon-price"></i>  {{ product.cost }} zł</small>
-                        <small><i class="icon-time"></i> {{ product.estimated_time }} min </small>
-                    </div>
-                    <div class="food-desc">
-                        <form action="{{ url_for('AddCart') }}" method="POST">
-                            <input type="hidden" name="id" value="{{ product.id }}">
-                            <button><span>Dodaj do koszyka</span></button>
-                        </form>
-                    </div>
-                </div>
+        <section id="our_menu" class="pt-0 pb-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="page_title text-center mb-4">
+						<h1>our menu</h1>
+						<div class="single_line"></div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<ul class="nav nav-tabs menu_tab mb-4" id="myTab" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" id="breakfast-tab" data-toggle="tab" href="#breakfast" role="tab">Śniadania</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="lunch-tab" data-toggle="tab" href="#lunch" role="tab">Obiady</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="dinner-tab" data-toggle="tab" href="#dinner" role="tab">Kolacje</a>
+					</li>
+				</ul>
+        	</div>
+			<div class="row">
+				<div class="tab-content col-lg-12" id="myTabContent">
+					<div class="tab-pane fade show active" id="breakfast" role="tabpanel" aria-labelledby="breakfast-tab">
+						<div class="row">
+                            {% for product in products %}
+                                {% if product.category == 'breakfast' %}
+							<div class="col-md-6">
+								<div class="single_menu">
+									<img src="{{ product.image }}" alt="{{ product.name }}">
+									<div class="menu_content">
+										<h4>{{ product.name }}  <span> {{ product.cost }} zł</span></h4>
+										<p>{{ product.description }}</p>
+									</div>
+								</div>
+							</div>
+                                {% endif %}
+                            {% endfor %}
+						</div>
+					</div>
+					<div class="tab-pane fade show active" id="lunch" role="tabpanel" aria-labelledby="lunch-tab">
+						<div class="row">
+                            {% for product in products %}
+                                {% if product.category == 'dinner' %}
+							<div class="col-md-6">
+								<div class="single_menu">
+									<img src="{{ product.image }}" alt="burger">
+									<div class="menu_content">
+										<h4>{{ product.name }}  <span> {{ product.cost }} zł</span></h4>
+										<p>{{ product.description }}</p>
+									</div>
+								</div>
+							</div>
+                                {% endif %}
+                            {% endfor %}
+						</div>
+					</div>
+					<div class="tab-pane fade show active" id="dinner" role="tabpanel" aria-labelledby="dinner-tab">
+						<div class="row">
+                            {% for product in products %}
+                                {% if product.category == 'supper' %}
+							<div class="col-md-6">
+								<div class="single_menu">
+									<img src="{{ product.image }}" alt="burger">
+									<div class="menu_content">
+										<h4>{{ product.name }}  <span> {{ product.cost }} zł</span></h4>
+										<p>{{ product.description }}</p>
+									</div>
+								</div>
+							</div>
+                                {% endif %}
+                            {% endfor %}
+						</div>
+					</div>
+				</div>
+				<a href="#" class=" menu_btn btn btn-danger">view more</a>
+			</div>
+		</div>
+	</section>
             </div>
-            {% endfor %}
-            <br>
-        </div>
     </div>
 {% endblock content %}
