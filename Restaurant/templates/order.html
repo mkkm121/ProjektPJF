@@ -1,33 +1,29 @@
 {% extends "layout.html" %}
 {% block content %}
     <div id="information-order">
-    <form id="cart-btn" action="{{ url_for('getcart') }}">
-        <button style="width: 20%;"class="btn2" type='submit' ><i class="icon-cart"></i>Koszyk ({{ session['cart']|length}})</button>
-    </form>
         <div id="menu-box">
-        <section id="our_menu" class="pt-0 pb-5">
+        <section id="our_menu" class="pt-0 pb-4">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-12">
-					<div class="page_title text-center mb-4">
-						<h1>our menu</h1>
-						<div class="single_line"></div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
 				<ul class="nav nav-tabs menu_tab mb-4" id="myTab" role="tablist">
-					<li class="nav-item">
-						<a class="nav-link active" id="breakfast-tab" data-toggle="tab" href="#breakfast" role="tab">Śniadania</a>
+					<li class="nav-item active">
+						<a class="nav-link" id="breakfast-tab" data-toggle="tab" href="#breakfast" role="tab">Śniadania</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" id="lunch-tab" data-toggle="tab" href="#lunch" role="tab">Obiady</a>
+						<a class="nav-link" id="lunch-tab" data-toggle="tab" href="#dinner" role="tab">Obiady</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" id="dinner-tab" data-toggle="tab" href="#dinner" role="tab">Kolacje</a>
+						<a class="nav-link" id="dinner-tab" data-toggle="tab" href="#supper" role="tab">Kolacje</a>
+					</li>
+                    <li class="nav-item">
+						<a class="nav-link" id="snacks-tab" data-toggle="tab" href="#snacks" role="tab">Przystawki</a>
+					</li>
+                    <li class="nav-item">
+						<a class="nav-link" href="{{ url_for('getcart') }}"> <i class="icon-cart"></i>({{ session['cart']|length}})</a>
 					</li>
 				</ul>
         	</div>
+            <div class="products">
 			<div class="row">
 				<div class="tab-content col-lg-12" id="myTabContent">
 					<div class="tab-pane fade show active" id="breakfast" role="tabpanel" aria-labelledby="breakfast-tab">
@@ -35,11 +31,17 @@
                             {% for product in products %}
                                 {% if product.category == 'breakfast' %}
 							<div class="col-md-6">
-								<div class="single_menu">
+								<div class="single_menu mr-2">
 									<img src="{{ product.image }}" alt="{{ product.name }}">
 									<div class="menu_content">
 										<h4>{{ product.name }}  <span> {{ product.cost }} zł</span></h4>
-										<p>{{ product.description }}</p>
+                                        <p>
+                                        {{ product.description }}
+                                        <form style="display: flex;justify-content: flex-end" action="{{ url_for('AddCart') }}" method="POST">
+                                            <input type="hidden" name="id" value="{{ product.id }}">
+                                        <button class="add-button" href="addcart"><i class="icon-plus"></i></button>
+                                        </form>
+                                        </p>
 									</div>
 								</div>
 							</div>
@@ -47,7 +49,7 @@
                             {% endfor %}
 						</div>
 					</div>
-					<div class="tab-pane fade show active" id="lunch" role="tabpanel" aria-labelledby="lunch-tab">
+					<div class="tab-pane fade" id="dinner" role="tabpanel" aria-labelledby="lunch-tab">
 						<div class="row">
                             {% for product in products %}
                                 {% if product.category == 'dinner' %}
@@ -56,7 +58,13 @@
 									<img src="{{ product.image }}" alt="burger">
 									<div class="menu_content">
 										<h4>{{ product.name }}  <span> {{ product.cost }} zł</span></h4>
-										<p>{{ product.description }}</p>
+                                        <p>
+                                        {{ product.description }}
+                                        <form style="display: flex;justify-content: flex-end" action="{{ url_for('AddCart') }}" method="POST">
+                                            <input type="hidden" name="id" value="{{ product.id }}">
+                                        <button class="add-button" href="addcart"><i class="icon-plus"></i></button>
+                                        </form>
+                                        </p>
 									</div>
 								</div>
 							</div>
@@ -64,7 +72,7 @@
                             {% endfor %}
 						</div>
 					</div>
-					<div class="tab-pane fade show active" id="dinner" role="tabpanel" aria-labelledby="dinner-tab">
+					<div class="tab-pane fade" id="supper" role="tabpanel" aria-labelledby="dinner-tab">
 						<div class="row">
                             {% for product in products %}
                                 {% if product.category == 'supper' %}
@@ -73,7 +81,36 @@
 									<img src="{{ product.image }}" alt="burger">
 									<div class="menu_content">
 										<h4>{{ product.name }}  <span> {{ product.cost }} zł</span></h4>
-										<p>{{ product.description }}</p>
+                                        <p>
+                                        {{ product.description }}
+                                        <form style="display: flex;justify-content: flex-end" action="{{ url_for('AddCart') }}" method="POST">
+                                            <input type="hidden" name="id" value="{{ product.id }}">
+                                        <button class="add-button" href="addcart"><i class="icon-plus"></i></button>
+                                        </form>
+                                        </p>
+									</div>
+								</div>
+							</div>
+                                {% endif %}
+                            {% endfor %}
+						</div>
+					</div>
+                    <div class="tab-pane fade" id="snacks" role="tabpanel" aria-labelledby="snacks-tab">
+						<div class="row">
+                            {% for product in products %}
+                                {% if product.category == 'snacks' %}
+							<div class="col-md-6">
+								<div class="single_menu">
+									<img src="{{ product.image }}" alt="burger">
+									<div class="menu_content">
+										<h4>{{ product.name }}  <span> {{ product.cost }} zł</span></h4>
+                                        <p>
+                                        {{ product.description }}
+                                        <form style="display: flex;justify-content: flex-end" action="{{ url_for('AddCart') }}" method="POST">
+                                            <input type="hidden" name="id" value="{{ product.id }}">
+                                        <button class="add-button" href="addcart"><i class="icon-plus"></i></button>
+                                        </form>
+                                        </p>
 									</div>
 								</div>
 							</div>
@@ -82,10 +119,12 @@
 						</div>
 					</div>
 				</div>
-				<a href="#" class=" menu_btn btn btn-danger">view more</a>
+            </div>
 			</div>
 		</div>
 	</section>
             </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </div>
 {% endblock content %}

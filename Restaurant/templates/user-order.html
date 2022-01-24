@@ -2,6 +2,17 @@
 {% block content %}
     <div id="information-box">
         <div class="information-box-content3">
+                 {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div>
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
                 <h4>Dane Klienta: </h4>
                 Nazwa użytkownika: {{ customer.username }} <br>
                 E-mail: {{ customer.email }} <br>
