@@ -24,7 +24,7 @@
         <div  class="information-box-content-menu">
             {% for order in orders %}
                 <form action="orders/{{ order.invoice }}">
-                    <button class="btn2" type='submit' ><i class="icon-food"></i>{{ order.date_created.strftime("%b %d %Y") }}</button>
+                    <button style="width: 100%" class="btn2" type='submit' ><i class="icon-food"></i>{{ order.date_created.strftime("%b %d %Y") }}</button>
                 </form>
             {% endfor %}
         </div>
@@ -34,7 +34,7 @@
         <form method="post" action="" class ='form-group-text'>
             {{ form.hidden_tag() }}
             <fieldset class ='form-group'>
-                    <legend>Aktualizuj konto</legend>
+                    <p style="color:#ff3300;text-align: left;font-size: 20px;font-weight: bold">Aktualizuj konto</p>
                     <div class="form-group-element">
                         {{ form.username.label(class="form-control-label") }}
                         {% if form.username.errors %}

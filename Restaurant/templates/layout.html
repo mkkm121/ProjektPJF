@@ -15,13 +15,13 @@
     <div id="top-bar">
         <div id="res_name">
             <div class="page_title text-center">
-                <h3>SNACKZEN</h3>
+                <h3 style="font-family: Food">SNACKZEN</h3>
                 <div class="single_line"></div>
             </div>
         </div>
         <div id="contest-menu">
             {% for el in menu %}
-                <a class="contest-menu-element" href="{{ el.url }}">{{ el.name }} </a>
+                <a style="font-weight: bold;color:maroon" class="contest-menu-element" href="{{ el.url }}">{{ el.name }} </a>
             {% endfor %}
             {% if current_user.is_authenticated %}
                 <div class="contest-menu-element-user">
