@@ -24,7 +24,7 @@
         <div  class="information-box-content-menu">
             {% for order in orders %}
                 <form action="orders/{{ order.invoice }}">
-                    <button style="width: 100%" class="btn2" type='submit' ><i class="icon-food"></i>{{ order.date_created.strftime("%b %d %Y") }}</button>
+                    <button style="width: 100%" class="btn2" type='submit' ><i class="icon-food"></i>{{ order.date_created.strftime("%d %m %Y") }}</button>
                 </form>
             {% endfor %}
         </div>

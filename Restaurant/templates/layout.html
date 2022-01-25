@@ -28,6 +28,9 @@
             <a><i class="icon-user"></i></a>{{ current_user.username }}
                 <div class="dropdown-content">
                     <a href="\account">Mój profil</a>
+                    {% if current_user.username =='admin' %}
+                        <a href="\admin_panel">Panel Sterowania</a>
+                        {% endif %}
                     <a href="{{ url_for("logout") }}">Wyloguj</a>
                  </div>
             </div>

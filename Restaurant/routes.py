@@ -1,5 +1,4 @@
 import secrets
-from sqlalchemy.sql.expression import func
 from flask import render_template, flash, redirect, url_for, request, session, make_response
 from Restaurant.forms import RegistrationForm, LoginForm, UpdateAccountForm,\
     RequestResetForm, ResetPasswordForm, MessageForm
