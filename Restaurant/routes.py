@@ -1,4 +1,5 @@
 import secrets
+from sqlalchemy.sql.expression import func
 from flask import render_template, flash, redirect, url_for, request, session, make_response
 from Restaurant.forms import RegistrationForm, LoginForm, UpdateAccountForm,\
     RequestResetForm, ResetPasswordForm, MessageForm
@@ -64,13 +65,16 @@ def menu_rend():
 
 @app.route('/admin_panel')
 def admin_panel():
-    return render_template('admin_panel.html', menu=menu, menu_elements=menu_elements, menu_elements2=menu_elements2, title='Menu')
+    users = User.query.all()
+    orders = CustomerOrder.query.all()
+    products = Product.query.all()
+    return render_template('admin_panel.html', menu=menu, title='Admin Panel', orders=orders, last_user=len(users),users=users,
+                           number_of_orders=len(orders), products=products, number_of_products=len(products))
 
 @app.route('/order')
 def order():
     products = Product.query.all()
-    products2 = Product.query.all()
-    return render_template('order.html', menu=menu, title='Order', products=products, products2=products2)
+    return render_template('order.html', menu=menu, title='Order', products=products)
 
 def send_message(name, text, email, address, topic):
     msg = Message(topic, sender='noreply@demo.com', recipients=['snackzen0@gmail.com'])
