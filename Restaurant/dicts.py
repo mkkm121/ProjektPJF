@@ -45,28 +45,28 @@ about_content = [
 ]
 menu_elements = [
     {
-        'image':'background-image: url(/static/food.jpg)',
+        'image':'background-image: url("https://images.pexels.com/photos/103124/pexels-photo-103124.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")',
     },
 {
-        'image':'Śniadanie',
+        'image':'Sniadania',
         'func' : 'openForm()'
 
     },
 {
-        'image':'background-image: url(/static/food2.jfif)'
+        'image':'background-image: url("https://images.pexels.com/photos/2116094/pexels-photo-2116094.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")'
     },
 {
-        'image':'Obiad',
+        'image':'Obiady',
         'func' : 'openForm2()'
     },
 ]
 menu_elements2 = [
 {
-    'image':'Kolacja',
+    'image':'Kolacje',
     'func' : 'openForm3()'
     },
 {
-    'image':'background-image: url(/static/food3.jpg)'
+    'image':'background-image: url("https://images.pexels.com/photos/4101805/pexels-photo-4101805.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")'
     },
 {
     'image':'Przystawki',
@@ -74,25 +74,25 @@ menu_elements2 = [
 
     },
 {
-    'image': 'background-image: url(/static/food.jpg)'
+    'image': 'background-image: url("https://images.pexels.com/photos/5975907/pexels-photo-5975907.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")'
     },
 ]
 
 images = [
     {
-        'img':'static/food.jpg',
+        'img':'static/food2.jfif',
         'name':'img-1',
         'prev':'img-3',
         'next':'img-2',
     },
     {
-        'img': 'static/food2.jfif',
+        'img': 'https://as1.ftcdn.net/jpg/02/21/07/80/1000_F_221078059_5lMlCvNQ3lGlJAXuX1nuIFoWNTAwjkdf.jpg',
         'name':'img-2',
         'prev':'img-1',
         'next':'img-3',
     },
     {
-        'img': 'static/food3.jpg',
+        'img': 'static/food.jpg',
         'name':'img-3',
         'prev':'img-2',
         'next':'img-1',

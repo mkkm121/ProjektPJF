@@ -11,7 +11,7 @@
                 {% if loop.index % 2 == 1 %}
                     <div style = "{{ i.image }}" class="menu-element-image"></div>
                 {% elif loop.index % 2 == 0 %}
-                    <div class="menu-element" name=""><p>{{ i.image }}<br><br><a id="contact" onclick="{{ i.func }}">Zobacz wiecej!</a></p></div>
+                    <div style="font-family: Food" class="menu-element" name=""><p>{{ i.image }}<br><br><a id="contact" onclick="{{ i.func }}">Zobacz wiecej!</a></p></div>
                 {% endif %}
             {% endfor %}
         </div>
@@ -20,7 +20,7 @@
                 {% if loop.index % 2 == 0 %}
                     <div style = "{{ i.image }}" class="menu-element-image"></div>
                 {% elif loop.index % 2 == 1 %}
-                    <div class="menu-element"><p>{{ i.image }}<br><br><a id="contact" onclick="{{ i.func }}">Zobacz wiecej!</a></p></div>
+                    <div style="font-family: Food" class="menu-element"><p>{{ i.image }}<br><br><a id="contact" onclick="{{ i.func }}">Zobacz wiecej!</a></p></div>
                 {% endif %}
             {% endfor %}
         </div>
@@ -28,7 +28,7 @@
     </div>
     <div class="form-popup" id="myForm">
         <button style="float: right;clear: both;margin-right:5px"  type="button" class="btn-close" aria-label="Close" onclick="closeForm()"></button>
-        <div class="form-popup-title">Śniadania</div>
+        <div style="font-family: Food" class="form-popup-title ">Sniadania</div>
         <div class="form-popup-content">
             <div class="form-popup-text">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus facilisis dolor at lobortis. Curabitur imperdiet tellus ut dictum euismod. Mauris nisi velit, congue et sapien sed, interdum dignissim lacus. Curabitur nisi risus, ullamcorper a ultrices ac, dignissim eu tortor. Etiam odio ante, pellentesque efficitur elit ut, fermentum lacinia elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas ultricies velit a tortor faucibus, sit amet iaculis eros sodales. Pellentesque malesuada augue commodo orci scelerisque, sit amet sollicitudin metus placerat. Integer velit lorem, placerat sit amet venenatis ultricies, molestie vel massa.
@@ -42,7 +42,7 @@
 
         <div class="form-popup" id="myForm2">
         <button style="float: right;clear: both;margin-right:5px"  type="button" class="btn-close" aria-label="Close" onclick="closeForm2()"></button>
-         <div class="form-popup-title">Obiady</div>
+         <div style="font-family: Food" class="form-popup-title">Obiady</div>
         <div class="form-popup-content">
             <div style = "background-image: url(/static/food.jpg)" class="form-popup-img">
             </div>
@@ -55,7 +55,7 @@
     </div>
     <div class="form-popup" id="myForm3">
     <button style="float: right;clear: both;margin-right:5px" type="button" class="btn-close" aria-label="Close" onclick="closeForm3()"></button>
-         <div class="form-popup-title">Kolacje</div>
+         <div style="font-family: Food" class="form-popup-title">Kolacje</div>
         <div class="form-popup-content">
             <div class="form-popup-text">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus facilisis dolor at lobortis. Curabitur imperdiet tellus ut dictum euismod. Mauris nisi velit, congue et sapien sed, interdum dignissim lacus. Curabitur nisi risus, ullamcorper a ultrices ac, dignissim eu tortor. Etiam odio ante, pellentesque efficitur elit ut, fermentum lacinia elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas ultricies velit a tortor faucibus, sit amet iaculis eros sodales. Pellentesque malesuada augue commodo orci scelerisque, sit amet sollicitudin metus placerat. Integer velit lorem, placerat sit amet venenatis ultricies, molestie vel massa.
@@ -68,7 +68,7 @@
     </div>
      <div class="form-popup" id="myForm4">
      <button style="float: right;clear: both;margin-right:5px"  type="button" class="btn-close" aria-label="Close" onclick="closeForm4()"></button>
-         <div class="form-popup-title">Przystawki</div>
+         <div style="font-family: Food" class="form-popup-title">Przystawki</div>
         <div class="form-popup-content">
             <div style = "background-image: url(/static/food4.jpg)" class="form-popup-img">
             </div>
