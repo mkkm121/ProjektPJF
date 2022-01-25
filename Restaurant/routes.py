@@ -62,6 +62,9 @@ def about():
 def menu_rend():
     return render_template('menu.html', menu=menu, menu_elements=menu_elements, menu_elements2=menu_elements2, title='Menu')
 
+@app.route('/admin_panel')
+def admin_panel():
+    return render_template('admin_panel.html', menu=menu, menu_elements=menu_elements, menu_elements2=menu_elements2, title='Menu')
 
 @app.route('/order')
 def order():
@@ -104,6 +107,10 @@ def register():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = RegistrationForm()
+    user = User.query.filter_by(email=form.email.data).first()
+    if user:
+        flash('Konto z podanym e-mailem już istnieje!', 'danger')
+        return redirect(url_for('register'))
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(username=form.username.data, email=form.email.data, password=hashed_password)
