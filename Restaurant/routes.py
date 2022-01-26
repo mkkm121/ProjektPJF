@@ -329,9 +329,8 @@ def getorder():
 def orders(invoice):
     if current_user.is_authenticated:
        total = 0
-       customer_id = current_user.id
-       customer = User.query.filter_by(id=customer_id).first()
        orders = CustomerOrder.query.filter_by(invoice=invoice).first()
+       customer = User.query.filter_by(id=orders.customer_id).first()
        for _key, product in orders.orders.items():
            total += float(product['price']) * int(product['quantity'])
     else:
