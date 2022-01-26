@@ -1,23 +1,23 @@
 menu = [
     {
         'name':'HOME',
-        'url':'/home'
+        'url':'main.home'
     },
     {
         'name':'O nas',
-        'url': '/about'
+        'url': 'main.about'
     },
 {
         'name':'Oferta',
-        'url':'/menu'
+        'url':'main.menu_rend'
     },
 {
         'name':'Zamów',
-        'url':'/order'
+        'url':'main.order'
     },
 {
         'name':'Kontakt',
-        'url':'/contact'
+        'url':'main.contact'
     }
 ]
 about_content = [

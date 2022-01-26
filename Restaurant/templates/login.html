@@ -50,13 +50,13 @@
                     {{ form.submit(class="btn") }}
                  </div>
                 <div class="text-muted">
-                     <a href="{{ url_for('reset_request') }}">Zapomniales hasla?</a>
+                     <a href="{{ url_for('users.reset_request') }}">Zapomniales hasla?</a>
                 </div>
             </fieldset>
         </form>
     <div class="border-top pt-3">
         <small class="text-muted">
-            Nie jestes zarejestrowany? <a class="ml-2" href="{{ url_for('register') }}">Zarejestruj sie!</a>
+            Nie jestes zarejestrowany? <a class="ml-2" href="{{ url_for('users.register') }}">Zarejestruj sie!</a>
         </small>
     </div>
     </div>

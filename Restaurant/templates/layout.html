@@ -21,7 +21,7 @@
         </div>
         <div id="contest-menu">
             {% for el in menu %}
-                <a style="font-weight: bold;color:maroon" class="contest-menu-element" href="{{ el.url }}">{{ el.name }} </a>
+                <a style="font-weight: bold;color:maroon" class="contest-menu-element" href="{{ url_for(el.url) }}">{{ el.name }} </a>
             {% endfor %}
             {% if current_user.is_authenticated %}
                 <div class="contest-menu-element-user">
@@ -31,7 +31,7 @@
                     {% if current_user.username =='admin' %}
                         <a href="\admin_panel">Panel Sterowania</a>
                         {% endif %}
-                    <a href="{{ url_for("logout") }}">Wyloguj</a>
+                    <a href="{{ url_for("users.logout") }}">Wyloguj</a>
                  </div>
             </div>
             {% else %}

@@ -1,10 +1,8 @@
 from flask_wtf import FlaskForm
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from wtforms.fields.html5 import TelField
 from Restaurant.models import User
-
 
 class RegistrationForm(FlaskForm):
     username = StringField('Nazwa użytkownika', validators=[DataRequired(), Length(min=2, max=20)])
@@ -63,15 +61,3 @@ class ResetPasswordForm(FlaskForm):
     password = PasswordField('Hasło', validators=[DataRequired()])
     confirm_password = PasswordField('Powtórz hasło', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Resetuj hasło!')
-
-
-class MessageForm(FlaskForm):
-    name = StringField('Nazwa*', validators=[DataRequired()])
-    email = StringField('E-mail*', validators=[DataRequired(), Email()])
-    phone = TelField('Telefon')
-    address = StringField('Adres')
-    topic = TextAreaField('Temat*', validators=[DataRequired(), Length(min=0, max=50)])
-    body = TextAreaField('Wiadomość*', validators=[DataRequired(), Length(min=1, max=500)])
-    submit = SubmitField('Wyślij!')
-
-

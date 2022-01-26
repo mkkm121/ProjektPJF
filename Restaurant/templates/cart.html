@@ -14,7 +14,7 @@
         {% endwith %}
         <div id="cart" style="overflow-y: auto;">
         <span style="margin-bottom: 1%">
-            <form style="float: left;clear: both" action="{{url_for('order')}}">
+            <form style="float: left;clear: both" action="{{url_for('main.order')}}">
                         <button style="width: 5%" class="btn btn-primary hBack" type='submit' >&#11178;</button>
                         <h1 style="text-align: left">Koszyk</h1>
             </form>
@@ -32,7 +32,7 @@
                                 </div>
                                 <div class="col-2" style="display: flex;flex-direction: column">
                                     <div class ="row">
-                                    <form action="{{ url_for('updatecart', code=key) }}" method="POST">
+                                    <form action="{{ url_for('cart.updatecart', code=key) }}" method="POST">
                                     <input style="width: 80%" type="number" class="cartItemQuantity p-1 text-center" name="quantity" min="1" value="{{ product.quantity }}">
                                     <button type="submit" class="btn"><i class="icon-update"></i></button>
                                     </form>
@@ -44,7 +44,7 @@
                                     </div>
                                 </div>
                                 <div class="col-2">
-                                        <form action="{{url_for('deletecart', id=key)}}">
+                                        <form action="{{url_for('cart.deletecart', id=key)}}">
                                             <button style="color: red" type="submit" class="btn-close" aria-label="Close" ></button>
                                         </form>
                                     </div>
@@ -61,11 +61,11 @@
                                 <p id="total"> {{ total }}zł</p>
                             </div>
                         </div>
-                        <form style="display: flex;justify-content: center" action="{{url_for('getorder')}}">
+                        <form style="display: flex;justify-content: center" action="{{url_for('order.getorder')}}">
                             <button id="btn-checkout" class="shopnow" type='submit'><span>Zamów</span></button>
                         </form>
                         <br>
-                        <form style="display: flex;justify-content: center" action="{{url_for('clearcart', id=key)}}">
+                        <form style="display: flex;justify-content: center" action="{{url_for('cart.clearcart', id=key)}}">
                             <button id="btn-checkout" class="clear" type='submit' ><span>Wyczyść koszyk</span></button>
                         </form>
                     </div>

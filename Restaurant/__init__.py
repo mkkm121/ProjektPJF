@@ -30,12 +30,17 @@ admin.add_view(MyModelView(User, db.session))
 admin.add_view(MyModelView(Product, db.session))
 admin.add_view(MyModelView(CustomerOrder, db.session))
 
-from Restaurant import routes
+from Restaurant.Users import routes
+from Restaurant.cart import routes
+from Restaurant.orders import routes
+from Restaurant.main import routes
 
 from Restaurant.main.routes import main
 from Restaurant.Users.routes import users
 from Restaurant.cart.routes import cart
+from Restaurant.orders.routes import order
 
 app.register_blueprint(main)
 app.register_blueprint(users)
 app.register_blueprint(cart)
+app.register_blueprint(order)

@@ -19,7 +19,7 @@
 						<a class="nav-link" id="snacks-tab" data-toggle="tab" href="#snacks" role="tab">Przystawki</a>
 					</li>
                     <li class="nav-item">
-						<a class="nav-link" href="{{ url_for('getcart') }}"> <i class="icon-cart"></i>({{ session['cart']|length}})</a>
+						<a class="nav-link" href="{{ url_for('cart.getcart') }}"> <i class="icon-cart"></i>({{ session['cart']|length}})</a>
 					</li>
 				</ul>
         	</div>
@@ -37,7 +37,7 @@
 										<h4>{{ product.name }}  <span> {{ product.cost }} zł</span></h4>
                                         <p>
                                         {{ product.description }}
-                                        <form style="display: flex;justify-content: flex-end" action="{{ url_for('AddCart') }}" method="POST">
+                                        <form style="display: flex;justify-content: flex-end" action="{{ url_for('cart.AddCart') }}" method="POST">
                                             <input type="hidden" name="id" value="{{ product.id }}">
                                         <button class="add-button" href="addcart"><i class="icon-plus"></i></button>
                                         </form>
@@ -60,7 +60,7 @@
 										<h4>{{ product.name }}  <span> {{ product.cost }} zł</span></h4>
                                         <p>
                                         {{ product.description }}
-                                        <form style="display: flex;justify-content: flex-end" action="{{ url_for('AddCart') }}" method="POST">
+                                        <form style="display: flex;justify-content: flex-end" action="{{ url_for('cart.AddCart') }}" method="POST">
                                             <input type="hidden" name="id" value="{{ product.id }}">
                                         <button class="add-button" href="addcart"><i class="icon-plus"></i></button>
                                         </form>
@@ -83,7 +83,7 @@
 										<h4>{{ product.name }}  <span> {{ product.cost }} zł</span></h4>
                                         <p>
                                         {{ product.description }}
-                                        <form style="display: flex;justify-content: flex-end" action="{{ url_for('AddCart') }}" method="POST">
+                                        <form style="display: flex;justify-content: flex-end" action="{{ url_for('cart.AddCart') }}" method="POST">
                                             <input type="hidden" name="id" value="{{ product.id }}">
                                         <button class="add-button" href="addcart"><i class="icon-plus"></i></button>
                                         </form>
@@ -106,7 +106,7 @@
 										<h4>{{ product.name }}  <span> {{ product.cost }} zł</span></h4>
                                         <p>
                                         {{ product.description }}
-                                        <form style="display: flex;justify-content: flex-end" action="{{ url_for('AddCart') }}" method="POST">
+                                        <form style="display: flex;justify-content: flex-end" action="{{ url_for('cart.AddCart') }}" method="POST">
                                             <input type="hidden" name="id" value="{{ product.id }}">
                                         <button class="add-button" href="addcart"><i class="icon-plus"></i></button>
                                         </form>

@@ -41,19 +41,19 @@
                 </table>
                 <h3 style ="text-align: right">Razem: {{ total }} zł</h3>
                 <div class="buttons">
-                    <form class="form-btn" action="{{url_for('get_pdf', invoice=invoice)}}" method="POST">
+                    <form class="form-btn" action="{{url_for('order.get_pdf', invoice=invoice)}}" method="POST">
                         <button class="btn" type='submit'><i class="icon-pdf"></i>Wydrukuj PDF</button>
                     </form>
-                    <form class="form-btn" action="{{url_for('order_again', invoice=invoice)}}" method="POST">
+                    <form class="form-btn" action="{{url_for('order.order_again', invoice=invoice)}}" method="POST">
                         <button class="btn" type='submit'><i class="icon-update"></i>Zamów ponownie</button>
                     </form>
                     {% if orders.status !='Niezapłacone' or current_user.id|int != orders.customer_id|int %}
                     {% else %}
-                    <form class="form-btn" action="{{url_for('payment_delivery')}}" method="POST">
+                    <form class="form-btn" action="{{url_for('order.payment_delivery')}}" method="POST">
                         <input type="hidden" name="invoice" value="{{orders.invoice}}">
                         <button class="btn" type='submit'><i class="icon-cash"></i>Płatność przy odbiorze</button>
                     </form>
-                    <form class="form-btn" action="{{url_for('payment')}}" method="POST">
+                    <form class="form-btn" action="{{url_for('order.payment')}}" method="POST">
                         {% set amount =  total.replace('.','') %}
                         {% set amount =  amount + '0' %}
                         <input type="hidden" name="amount" value="{{amount}}">

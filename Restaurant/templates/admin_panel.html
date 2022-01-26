@@ -111,7 +111,7 @@
           <td style="width: 12%" class="text-center">{{ order.id }}</td>
             <td style="width: 8%" class="text-center" >
             {% if order.status != 'Dostarczono' and order.status != 'Anulowane' %}
-                <form style="width: 100%" class="form-btn" action="{{url_for('update_order')}}" method="POST">
+                <form style="width: 100%" class="form-btn" action="{{url_for('order.update_order')}}" method="POST">
                     <input type="hidden" name="invoice" value="{{order.invoice}}">
                     <input type="hidden" name="status" value="{{'Anulowane'}}">
                 <button style="margin: auto" class="btn"><i class="fas fa-minus-circle"></i></button>
@@ -120,21 +120,21 @@
             </td>
             <td style="width: 8%" class="text-center">
                 {% if order.status=='Zapłacone' or order.status=='Płatność przy odbiorze' %}
-                    <form style="width: 100%" class="form-btn" action="{{url_for('update_order')}}" method="POST">
+                    <form style="width: 100%" class="form-btn" action="{{url_for('order.update_order')}}" method="POST">
                         <input type="hidden" name="invoice" value="{{order.invoice}}">
                         <input type="hidden" name="status" value="{{'W przygotowaniu'}}">
                     <button style="background-color: #ff9933;margin: auto" class="btn"><i class="fas fa-hourglass-half"></i></button>
                     </form>
                 {% endif %}
                 {% if order.status=='W przygotowaniu' %}
-                    <form style="width: 100%" class="form-btn" action="{{url_for('update_order')}}" method="POST">
+                    <form style="width: 100%" class="form-btn" action="{{url_for('order.update_order')}}" method="POST">
                         <input type="hidden" name="invoice" value="{{order.invoice}}">
                         <input type="hidden" name="status" value="{{'Wysłano'}}">
                     <button style="background-color: #39e600;margin: auto" class="btn"><i class="fas fa-truck"></i></button>
                     </form>
                 {% endif %}
                 {% if order.status=='Wysłano' %}
-                    <form style="width: 100%" class="form-btn" action="{{url_for('update_order')}}" method="POST">
+                    <form style="width: 100%" class="form-btn" action="{{url_for('order.update_order')}}" method="POST">
                         <input type="hidden" name="invoice" value="{{order.invoice}}">
                         <input type="hidden" name="status" value="{{'Dostarczono'}}">
                     <button style="background-color: #009933;margin: auto" class="btn"><i class="fas fa-check-circle"></i></button>
