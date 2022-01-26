@@ -373,3 +373,13 @@ def order_again(invoice):
         total += float(product['price']) * int(product['quantity'])
     return render_template('cart.html', menu=menu, title='Cart', form=form, total=total)
 
+
+@app.route('/update_order',methods=['POST'])
+def update_order():
+    if request.method == "POST":
+        invoice = request.form.get("invoice")
+        status = request.form.get("status")
+        order = CustomerOrder.query.filter_by(invoice=invoice).first()
+        order.status = status
+        db.session.commit()
+    return redirect(request.referrer)

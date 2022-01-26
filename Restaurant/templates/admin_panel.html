@@ -97,25 +97,66 @@
 </table>
         <table class="table table-hover " id="orders">
       <thead>
-        <th class="text-center">Id zamówienia</th>
+        <th style="width: 12%" class="text-center">Id zamówienia</th>
+        <th style="width: 8%" class="text-center" >Anuluj</th>
+        <th style="width: 8%" class="text-center">Zmień status</th>
         <th class="text-center">Invoice</th>
-        <th class="text-center">Id użytkownika</th>
+        <th class="text-center">E-mail użytkownika</th>
+        <th class="text-center">Data Złożenia</th>
         <th class="text-center">Status</th>
       </thead>
     <tbody>
-    {% for order in orders %}
+    {% for order in orders|reverse %}
         <tr>
-          <td class="text-center">{{ order.id }}</td>
-          <td>{{ order.invoice }}</td>
-          <td class="text-center">{{ order.customer_id}}</td>
-          <td><span class="label label-info"><span class="glyphicon glyphicon-time">&nbsp;</span>{{ order.status }}</span>
+          <td style="width: 12%" class="text-center">{{ order.id }}</td>
+            <td style="width: 8%" class="text-center" >
+            {% if order.status != 'Dostarczono' and order.status != 'Anulowane' %}
+                <form style="width: 100%" class="form-btn" action="{{url_for('update_order')}}" method="POST">
+                    <input type="hidden" name="invoice" value="{{order.invoice}}">
+                    <input type="hidden" name="status" value="{{'Anulowane'}}">
+                <button style="margin: auto" class="btn"><i class="fas fa-minus-circle"></i></button>
+                </form>
+            {% endif %}
+            </td>
+            <td style="width: 8%" class="text-center">
+                {% if order.status=='Zapłacone' or order.status=='Płatność przy odbiorze' %}
+                    <form style="width: 100%" class="form-btn" action="{{url_for('update_order')}}" method="POST">
+                        <input type="hidden" name="invoice" value="{{order.invoice}}">
+                        <input type="hidden" name="status" value="{{'W przygotowaniu'}}">
+                    <button style="background-color: #ff9933;margin: auto" class="btn"><i class="fas fa-hourglass-half"></i></button>
+                    </form>
+                {% endif %}
+                {% if order.status=='W przygotowaniu' %}
+                    <form style="width: 100%" class="form-btn" action="{{url_for('update_order')}}" method="POST">
+                        <input type="hidden" name="invoice" value="{{order.invoice}}">
+                        <input type="hidden" name="status" value="{{'Wysłano'}}">
+                    <button style="background-color: #39e600;margin: auto" class="btn"><i class="fas fa-truck"></i></button>
+                    </form>
+                {% endif %}
+                {% if order.status=='Wysłano' %}
+                    <form style="width: 100%" class="form-btn" action="{{url_for('update_order')}}" method="POST">
+                        <input type="hidden" name="invoice" value="{{order.invoice}}">
+                        <input type="hidden" name="status" value="{{'Dostarczono'}}">
+                    <button style="background-color: #009933;margin: auto" class="btn"><i class="fas fa-check-circle"></i></button>
+                    </form>
+                {% endif %}
+            </td>
+          <td class=""><a style="text-decoration: none;color:black " href="/orders/{{order.invoice}}">{{ order.invoice }}</a></td>
+          <td class="text-center">
+              {% for user in users %}
+                  {% if user.id == order.customer_id|int %}
+                      {{ user.email }}
+                  {% endif %}
+                  {% endfor %}
+            </td>
+            <td><span class="label label-info"><span class="glyphicon glyphicon-time">&nbsp;</span>{{ order.date_created.strftime("%d.%m.%y %H:%M:%S") }}</span>
+          <td ><span class="label label-info"><span class="glyphicon glyphicon-time">&nbsp;</span>{{ order.status }}</span>
           </td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
         <table class="table table-hover " id="products">
-
               <thead>
         <th class="text-center">ID Produktu</th>
         <th class="text-center">Nazwa</th>

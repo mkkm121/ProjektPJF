@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div id="information-box">
+    <div style="background-color: white" id="information-box">
         <div class="information-box-content3">
                  {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
@@ -23,10 +23,10 @@
                 <br>
                     <table class="table">
                     <thead>
-                        <th>Nr</th>
-                        <th>Nazwa</th>
-                        <th>Ilość</th>
-                        <th>Cena</th>
+                        <th class="text-center">Nr</th>
+                        <th class="text-center">Nazwa</th>
+                        <th class="text-center">Ilość</th>
+                        <th class="text-center">Cena</th>
                     </thead>
                     <tbody>
                         {% for key, product in orders.orders.items() %}
@@ -47,7 +47,7 @@
                     <form class="form-btn" action="{{url_for('order_again', invoice=invoice)}}" method="POST">
                         <button class="btn" type='submit'><i class="icon-update"></i>Zamów ponownie</button>
                     </form>
-                    {% if orders.status =='Zapłacone' or orders.status == 'Płatność przy odbiorze' %}
+                    {% if orders.status =='Niezapłacone' and current_user.id|int != orders.customer_id|int %}
                     {% else %}
                     <form class="form-btn" action="{{url_for('payment_delivery')}}" method="POST">
                         <input type="hidden" name="invoice" value="{{orders.invoice}}">
