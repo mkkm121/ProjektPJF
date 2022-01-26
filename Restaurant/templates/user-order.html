@@ -47,7 +47,7 @@
                     <form class="form-btn" action="{{url_for('order_again', invoice=invoice)}}" method="POST">
                         <button class="btn" type='submit'><i class="icon-update"></i>Zamów ponownie</button>
                     </form>
-                    {% if orders.status =='Niezapłacone' and current_user.id|int != orders.customer_id|int %}
+                    {% if orders.status !='Niezapłacone' or current_user.id|int != orders.customer_id|int %}
                     {% else %}
                     <form class="form-btn" action="{{url_for('payment_delivery')}}" method="POST">
                         <input type="hidden" name="invoice" value="{{orders.invoice}}">

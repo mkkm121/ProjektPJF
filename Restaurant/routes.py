@@ -64,10 +64,13 @@ def menu_rend():
 
 @app.route('/admin_panel')
 def admin_panel():
-    users = User.query.all()
-    orders = CustomerOrder.query.all()
-    products = Product.query.all()
-    return render_template('admin_panel.html', menu=menu, title='Admin Panel', orders=orders, last_user=len(users),users=users,
+    if current_user.username != 'admin':
+        return redirect("home")
+    else:
+        users = User.query.all()
+        orders = CustomerOrder.query.all()
+        products = Product.query.all()
+        return render_template('admin_panel.html', menu=menu, title='Admin Panel', orders=orders, last_user=len(users),users=users,
                            number_of_orders=len(orders), products=products, number_of_products=len(products))
 
 @app.route('/order')
