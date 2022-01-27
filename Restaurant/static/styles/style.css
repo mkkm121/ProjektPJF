@@ -19,11 +19,13 @@ body  {
 }
 footer
 {
+    color: maroon;
     border-top: groove;
     border-top-color: #800000;
     border-width: thin;
     text-align: center;
     font-size: small;
+    font-family: Food2;
 }
 form {
     width: 100%;
@@ -33,6 +35,11 @@ form {
 }
 footer p{
     margin-top: 8px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+footer i{
+    font-size: medium;
 }
 input[type=text],input[type=password], input[type=tel] {
   width: 100%;
@@ -326,6 +333,7 @@ a:hover {
     background-size: cover;
 }
 #contact{
+    transition: .3s;
     padding: 5px;
     text-decoration: none;
     color: #ff3300;
